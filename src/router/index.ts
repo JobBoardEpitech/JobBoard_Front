@@ -4,6 +4,7 @@ import CompaniesManager from "@/views/admin/CompaniesManagerView.vue";
 import AdvertisementsManager from "@/views/admin/AdvertisementsManagerView.vue";
 import Home from "@/views/client/Home.vue";
 import Login from "@/views/client/Login.vue";
+import Advertisements from "@/views/client/Advertisements.vue";
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -18,6 +19,11 @@ const router = createRouter({
             path: '/login',
             name: 'login',
             component: Login
+        },
+        {
+            path: '/advertisements',
+            name: 'advertisements',
+            component: Advertisements
         },
         // ADMIN
         {

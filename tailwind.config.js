@@ -13,8 +13,14 @@ module.exports = {
             '4xl': '2560px'
         },
         extend: {
+            colors: {
+                indigo: {
+                    600: "#4341c0"
+                }
+            },
             fontFamily: {
                 'fredoka': ['Fredoka One', 'sans-serif'],
+                'inter': ['Inter', 'sans-serif'],
             },
         },
     },

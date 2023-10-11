@@ -7,7 +7,7 @@
     <nav class="nav font-fredoka font-semibold text-4xl">
       <ul class="flex items-center gap-40">
         <li class="p-4 border-b-2 border-[#4341C0] border-opacity-0 hover:border-opacity-100 hover:text-[#4341C0] duration-200 cursor-pointer active">
-          <a href="">Emploi</a>
+          <router-link :to="{name: 'advertisements'}" role="button">Emploi</router-link>
         </li>
         <li class="p-4 border-b-2 border-[#4341C0] border-opacity-0 hover:border-opacity-100 hover:text-[#4341C0] duration-200 cursor-pointer">
           <a href="">Recruteur</a>

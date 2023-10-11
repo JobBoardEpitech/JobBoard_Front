@@ -1,5 +1,5 @@
 <template>
-  <header class="bg-[#0d121c] h-[calc(100vh-40px)] py-8 px-4 flex flex-col justify-between items-start rounded-md w-52">
+  <header class="bg-[#0d121c] h-[calc(100vh-40px)] py-8 px-4 flex flex-col justify-between items-start rounded-lg w-52">
     <nav class="flex flex-col gap-8">
       <div class="group flex flex-col gap-4">
         <h3 class="font-semibold text-gray-400 tracking-wider uppercase text-sm">Groups</h3>
@@ -8,19 +8,19 @@
             <div class="icon flex justify-center items-center w-6 h-6 bg-blue-500 rounded">
               <i class="ti ti-user text-white text-base"></i>
             </div>
-            <span>Client Manager</span>
+            <router-link to="client-manager">Client Manager</router-link>
           </li>
           <li class="menu-item flex gap-2 cursor-pointer py-1 px-2 rounded-l-md text-sm leading-5 h-[34px] text-white">
             <div class="icon flex justify-center items-center w-6 h-6 bg-yellow-500 rounded">
               <i class="ti ti-speakerphone text-white text-base"></i>
             </div>
-            <span>Advertisements</span>
+            <router-link to="advertisements-manager">Advertisements</router-link>
           </li>
           <li class="menu-item flex gap-2 cursor-pointer py-1 px-2 rounded-l-md text-sm leading-5 h-[34px] text-white">
             <div class="icon flex justify-center items-center w-6 h-6 bg-green-500 rounded">
               <i class="ti ti-package text-white text-base"></i>
             </div>
-            <span>Companies</span>
+            <router-link to="companies-manager">Companies</router-link>
           </li>
         </ul>
       </div>

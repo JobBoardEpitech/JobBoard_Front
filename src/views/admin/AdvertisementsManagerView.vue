@@ -8,13 +8,13 @@
   </head>
   <body class="bg-[#121b2d] text-[#f3f5f9] font-inter flex items-center h-screen p-4 gap-4">
 
-    <SideBar/>
+  <SideBar/>
 
-  <UserClientCard/>
+  <advertisements-manager-card/>
   </body>
   <Footer/>
 </template>
 <script setup lang="ts">
-import SideBar from "@/components/sideBar/SideBar.vue";
-import UserClientCard from "@/components/cards/UserClientCard.vue";
+import SideBar from "@/components/admin/sideBar/SideBar.vue";
+import AdvertisementsManagerCard from "@/components/admin/cards/AdvertisementsManagerCard.vue";
 </script>

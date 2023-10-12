@@ -30,9 +30,9 @@
         </form>
 
         <p class="mt-10 text-center text-sm text-gray-500">
-          Pas membre ?
+          Pas de compte ?
           <router-link :to="{name: 'registration'}" class="font-semibold leading-6 text-[#4341C0] hover:text-indigo-500">
-            S'inscrire
+            Créez-en un
           </router-link>
         </p>
       </div>

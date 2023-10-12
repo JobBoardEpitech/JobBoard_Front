@@ -14,8 +14,7 @@ const router = createRouter({
         // Client
         {
             path: '/',
-            name: 'home',
-            component: Home
+            redirect: 'advertisements',
         },
         {
             path: '/login',

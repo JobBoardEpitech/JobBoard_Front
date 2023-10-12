@@ -1,21 +1,26 @@
 <template>
-  <div :class="$attrs.class" @click="$emit('clickCard')">
+  <div class="h-screen bg-[#F0F0F0] overflow-hidden m-0 p-0">
     <NavBar/>
-    <div class="bg-[#F0F0F0] h-screen">
-      <section class="p-4">
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 gap-4 items-start mx-auto max-w-screen-lg">
-          <AdvertisementsCards
-              v-for="job in jobs"
-              :key="job.id"
-              :jobTitle="job.jobTitle"
-              :contractType="job.contractType"
-              :shortDescription="job.shortDescription"
-              @clickCard="onSelectJob(job)"
-              class="w-full mt-8"
-          />
-        </div>
-      </section>
-    </div>
+    <section class="flex flex-wrap justify-center gap-4 pt-8">
+      <div class="grid gap-4 overflow-auto max-h-[736px] pr-4">
+        <AdvertisementsCards
+            v-for="job in jobs"
+            :key="job.id"
+            :jobTitle="job.jobTitle"
+            :contractType="job.contractType"
+            :shortDescription="job.shortDescription"
+            @clickCard="onSelectJob(job)"
+        />
+      </div>
+      <DetailedAdvertisementsCard
+          v-if="selectedJob"
+          :companyName="selectedJob.companyName"
+          :jobTitle="selectedJob.jobTitle"
+          :longDescription="selectedJob.longDescription"
+          :hasUserApplied="selectedJob.hasUserApplied"
+          :contractType="selectedJob.contractType"
+      />
+    </section>
   </div>
 </template>
 
@@ -23,6 +28,7 @@
 
 import NavBar from "@/components/client/navbar/NavBar.vue";
 import AdvertisementsCards from "@/components/client/cards/AdvertisementsCards.vue";
+import DetailedAdvertisementsCard from "@/components/client/cards/DetailedAdvertisementsCard.vue";
 import {ref} from "vue";
 
 type Job = {
@@ -91,4 +97,5 @@ const selectedJob = ref(jobs[0])
 const onSelectJob = (job: Job) =>{
   selectedJob.value = job
 }
+
 </script>

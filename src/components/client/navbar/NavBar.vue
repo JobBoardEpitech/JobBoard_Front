@@ -15,7 +15,7 @@
       </ul>
     </nav>
       <!-- BUTTON LOGIN  -->
-      <router-link :to="{name: 'login'}" role="button" class="bg-[#4341C0] hover:bg-indigo-500 text-white font-fredoka py-2 px-4 rounded-3xl w-44 h-14 text-3xl text-center">
+      <router-link :to="{name: 'login'}" role="button" class="bg-[#4341C0] hover:bg-indigo-500 text-white font-fredoka py-2 px-4 rounded-3xl w-44 text-3xl text-center">
         LOGIN
       </router-link>
   </header>

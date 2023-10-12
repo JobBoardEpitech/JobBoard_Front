@@ -10,9 +10,6 @@
         <form class="space-y-6" action="#" method="POST">
 
           <div>
-            <div class="flex items-center justify-between">
-              <label for="password" class="block text-sm font-fredoka font-thin leading-6 text-gray-900"></label>
-            </div>
             <div class="mt-2">
               <input id="password" name="firstname" type="text" required class="border-indigo-600 block w-full rounded-md border-2 py-1.5 text-gray-900 shadow-sm  placeholder:text-gray-400 pl-[14px] sm:text-sm sm:leading-6 " placeholder="Prénom">
             </div>
@@ -69,6 +66,12 @@
             </router-link>
           </div>
         </form>
+        <p class="mt-10 text-center text-sm text-gray-500">
+          Vous avez déjà un compte ?
+          <router-link :to="{name: 'login'}" class="font-semibold leading-6 text-[#4341C0] hover:text-indigo-500">
+            Se connecter
+          </router-link>
+        </p>
       </div>
     </div>
   </div>

@@ -25,7 +25,7 @@
           :disabled="props.hasUserApplied"
           type="submit"
           :class="props.hasUserApplied ? 'bg-indigo-200 text-gray-500 cursor-not-allowed' : 'bg-indigo-600 hover:bg-indigo-500 text-white'"
-          class="flex font-semibold w-[12rem] md:max-w-[12rem] mt-12 px-5 py-3 rounded-full text-center text-sm self-center">
+          class="flex font-semibold justify-center w-[12rem] md:max-w-[12rem] mt-12 px-5 py-3 rounded-full text-center text-sm self-center">
         {{props.hasUserApplied ? "Vous avez déjà postulé" : "Postuler"}}
       </button>
     </section>

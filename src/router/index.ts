@@ -6,6 +6,7 @@ import Home from "@/views/client/Home.vue";
 import Login from "@/views/client/Login.vue";
 import Advertisements from "@/views/client/Advertisements.vue";
 import Registration from "@/views/client/Registration.vue";
+import Companies from "@/views/client/Companies.vue";
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -30,6 +31,11 @@ const router = createRouter({
             path: '/advertisements',
             name: 'advertisements',
             component: Advertisements
+        },
+        {
+            path: '/companies',
+            name: 'companies',
+            component: Companies
         },
         // ADMIN
         {

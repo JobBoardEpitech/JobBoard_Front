@@ -10,7 +10,7 @@
           <router-link :to="{name: 'advertisements'}" role="button">Emploi</router-link>
         </li>
         <li class="p-4 border-b-2 border-[#4341C0] border-opacity-0 hover:border-opacity-100 hover:text-[#4341C0] duration-200 cursor-pointer">
-          <a href="">Recruteur</a>
+          <router-link :to="{name: 'companies'}" role="button">Recruteur</router-link>
         </li>
       </ul>
     </nav>

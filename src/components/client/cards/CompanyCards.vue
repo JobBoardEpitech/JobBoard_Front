@@ -35,3 +35,4 @@ const props = defineProps({
 // EMIT
 const emit = defineEmits(['clickCard'])
 </script>
+

@@ -1,16 +1,16 @@
 <template>
   <div :class="$attrs.class" @click="$emit('clickCard')">
-    <NavBar/>
-    <div class="bg-[#F0F0F0] h-screen">
-      <section class="p-4">
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 gap-4 items-start mx-auto max-w-screen-lg">
+    <div class="flex flex-col h-screen bg-gray-200 m-0 p-0">
+      <NavBar/>
+      <section class="flex-grow p-4 overflow-y-auto">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-2 gap-4 items-start mx-auto max-w-screen-lg">
           <CompanyCards
               v-for="job in jobs"
               :key="job.id"
               :companyName="job.companyName"
               :short-description="job.shortDescription"
               @clickCard="onSelectJob(job)"
-              class="w-full mt-8"
+              class="w-card h-card mt-8"
           />
         </div>
       </section>
@@ -76,7 +76,79 @@ const jobs = [
     "shortDescription": "Conduct research to address environmental problems and develop prevention strategies.",
     "contractType": "Temporary",
     "hasUserApplied": false
-  }
+  },
+  {
+    "id": 6,
+    "companyName": "FinAssist",
+    "jobTitle": "Financial Analyst",
+    "longDescription": "As a Financial Analyst, you will be responsible for analyzing financial data and trends to advise on investment decisions. This role involves generating financial reports, creating investment strategies, and assisting in budget planning and forecasting.",
+    "shortDescription": "Analyze financial data and trends to advise on investment decisions.",
+    "contractType": "Full-time",
+    "hasUserApplied": true
+  },
+  {
+    "id": 7,
+    "companyName": "FinAssist",
+    "jobTitle": "Financial Analyst",
+    "longDescription": "As a Financial Analyst, you will be responsible for analyzing financial data and trends to advise on investment decisions. This role involves generating financial reports, creating investment strategies, and assisting in budget planning and forecasting.",
+    "shortDescription": "Analyze financial data and trends to advise on investment decisions.",
+    "contractType": "Full-time",
+    "hasUserApplied": true
+  },
+  {
+    "id": 8,
+    "companyName": "FinAssist",
+    "jobTitle": "Financial Analyst",
+    "longDescription": "As a Financial Analyst, you will be responsible for analyzing financial data and trends to advise on investment decisions. This role involves generating financial reports, creating investment strategies, and assisting in budget planning and forecasting.",
+    "shortDescription": "Analyze financial data and trends to advise on investment decisions.",
+    "contractType": "Full-time",
+    "hasUserApplied": true
+  },
+  {
+    "id": 9,
+    "companyName": "FinAssist",
+    "jobTitle": "Financial Analyst",
+    "longDescription": "As a Financial Analyst, you will be responsible for analyzing financial data and trends to advise on investment decisions. This role involves generating financial reports, creating investment strategies, and assisting in budget planning and forecasting.",
+    "shortDescription": "Analyze financial data and trends to advise on investment decisions.",
+    "contractType": "Full-time",
+    "hasUserApplied": true
+  },
+  {
+    "id": 10,
+    "companyName": "FinAssist",
+    "jobTitle": "Financial Analyst",
+    "longDescription": "As a Financial Analyst, you will be responsible for analyzing financial data and trends to advise on investment decisions. This role involves generating financial reports, creating investment strategies, and assisting in budget planning and forecasting.",
+    "shortDescription": "Analyze financial data and trends to advise on investment decisions.",
+    "contractType": "Full-time",
+    "hasUserApplied": true
+  },
+  {
+    "id": 11,
+    "companyName": "FinAssist",
+    "jobTitle": "Financial Analyst",
+    "longDescription": "As a Financial Analyst, you will be responsible for analyzing financial data and trends to advise on investment decisions. This role involves generating financial reports, creating investment strategies, and assisting in budget planning and forecasting.",
+    "shortDescription": "Analyze financial data and trends to advise on investment decisions.",
+    "contractType": "Full-time",
+    "hasUserApplied": true
+  },
+  {
+    "id": 12,
+    "companyName": "FinAssist",
+    "jobTitle": "Financial Analyst",
+    "longDescription": "As a Financial Analyst, you will be responsible for analyzing financial data and trends to advise on investment decisions. This role involves generating financial reports, creating investment strategies, and assisting in budget planning and forecasting.",
+    "shortDescription": "Analyze financial data and trends to advise on investment decisions.",
+    "contractType": "Full-time",
+    "hasUserApplied": true
+  },
+  {
+    "id": 13,
+    "companyName": "FinAssist",
+    "jobTitle": "Financial Analyst",
+    "longDescription": "As a Financial Analyst, you will be responsible for analyzing financial data and trends to advise on investment decisions. This role involves generating financial reports, creating investment strategies, and assisting in budget planning and forecasting.",
+    "shortDescription": "Analyze financial data and trends to advise on investment decisions.",
+    "contractType": "Full-time",
+    "hasUserApplied": true
+  },
 ]
 
 /* REFS */

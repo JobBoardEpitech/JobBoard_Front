@@ -30,7 +30,7 @@
         </form>
 
         <p class="mt-10 text-center text-sm text-gray-500">
-          Pas un membre?
+          Pas membre ?
           <a href="#" class="font-semibold leading-6 text-[#4341C0] hover:text-indigo-500">S'inscrire</a>
         </p>
       </div>

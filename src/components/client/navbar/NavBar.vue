@@ -6,11 +6,23 @@
       </a>
     <nav class="nav font-fredoka font-semibold text-4xl">
       <ul class="flex items-center gap-40">
-        <li class="p-4 border-b-2 border-[#4341C0] border-opacity-0 hover:border-opacity-100 hover:text-[#4341C0] duration-200 cursor-pointer active">
-          <router-link :to="{name: 'advertisements'}" role="button">Emploi</router-link>
+        <li :class="getLinkClasses('advertisements')" class="p-4 border-b-2 border-[#4341C0] border-opacity-0 hover:border-opacity-100 hover:text-[#4341C0] duration-200 cursor-pointer">
+          <router-link
+              :to="{name: 'advertisements'}"
+              role="button"
+              active-class="border-opacity-100 text-[#4341C0]"
+          >
+            Emploi
+          </router-link>
         </li>
-        <li class="p-4 border-b-2 border-[#4341C0] border-opacity-0 hover:border-opacity-100 hover:text-[#4341C0] duration-200 cursor-pointer">
-          <router-link :to="{name: 'companies'}" role="button">Recruteur</router-link>
+        <li :class="getLinkClasses('companies')" class="p-4 border-b-2 border-[#4341C0] border-opacity-0 hover:border-opacity-100 hover:text-[#4341C0] duration-200 cursor-pointer">
+          <router-link
+              :to="{name: 'companies'}"
+              role="button"
+              active-class="border-opacity-100 text-[#4341C0]"
+          >
+            Recruteur
+          </router-link>
         </li>
       </ul>
     </nav>
@@ -22,5 +34,15 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue';
+import { useRoute } from 'vue-router';
 
+const route = useRoute();
+
+const getLinkClasses = (name: string) => {
+  return {
+    'border-opacity-100': route.name === name,
+    'text-[#4341C0]': route.name === name,
+  };
+};
 </script>

@@ -1,11 +1,11 @@
 <template>
   <link href='https://fonts.googleapis.com/css?family=Fredoka+One' rel='stylesheet'>
-  <div class="flex items-center justify-center mt-28 ">
-    <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+  <div class="flex items-center justify-center mt-28">
+    <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8 sm:max-w-sm w-full">
       <h2 class="font-fredoka font-semibold grid justify-items-center text-[#4341C0] text-4xl">
         JOBBOARD
       </h2>
-      <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+      <div class="mt-10 sm:mx-auto w-full">
 
         <form class="space-y-6" action="#" method="POST">
           <div>

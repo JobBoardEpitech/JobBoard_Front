@@ -1,8 +1,8 @@
 <template>
   <NavBar/>
   <body class="bg-slate-200 h-screen">
-    <section class="flex flex-wrap">
-      <div class="grid mt-24 gap-4">
+    <section class="flex flex-wrap justify-center gap-4 pt-8">
+      <div class="grid gap-4">
         <AdvertisementsCards
             v-for="job in jobs"
             :key="job.id"

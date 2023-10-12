@@ -3,7 +3,7 @@
   <NavBar/>
   <body class="bg-slate-200 h-screen">
   <section class="flex flex-wrap gap-4">
-    <div class="flex flex-wrap mt-16 gap-4">
+    <div class="flex flex-wrap gap-4 justify-center items-start">
       <AdvertisementsCards
           v-for="job in jobs"
           :key="job.id"

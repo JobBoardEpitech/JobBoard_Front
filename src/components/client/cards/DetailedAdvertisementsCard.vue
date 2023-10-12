@@ -1,8 +1,8 @@
 <template>
   <div
       class="flex flex-col">
-    <section class="bg-white flex w-[552px] max-w-full grow flex-col mt-24 pl-5 pr-5 pt-7 pb-10 rounded-xl ml-24">
-      <header class="flex w-[498px] max-w-full items-start justify-between gap-4 max-md:flex-wrap max-md:justify-center">
+    <section class="bg-white flex w-full max-w-full grow flex-col pl-5 pr-5 pt-7 pb-10 rounded-xl">
+      <header class="flex w-full max-w-full items-start justify-between gap-4 max-md:flex-wrap max-md:justify-center">
         <img loading="lazy" src="src/assets/img/image5.png" class="aspect-square object-cover object-center w-[49px] shrink-0"  alt=""/>
         <div class="flex flex-col mt-1">
           <div class="text-neutral-500 text-xs font-semibold w-[229px]">

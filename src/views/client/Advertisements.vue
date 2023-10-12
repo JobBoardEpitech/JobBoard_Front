@@ -1,21 +1,21 @@
 <template>
   <div :class="$attrs.class" @click="$emit('clickCard')">
-  <NavBar/>
-  <body class="bg-slate-200 h-screen">
-  <section class="flex flex-wrap gap-4">
-    <div class="flex flex-wrap gap-4 justify-center items-start">
-      <AdvertisementsCards
-          v-for="job in jobs"
-          :key="job.id"
-          :jobTitle="job.jobTitle"
-          :contractType="job.contractType"
-          :shortDescription="job.shortDescription"
-          @clickCard="onSelectJob(job)"
-          class="w-full sm:w-1/2 md:w-1/3 lg:w-[21%] mt-8"
-      />
+    <NavBar/>
+    <div class="bg-[#F0F0F0] h-screen">
+      <section class="p-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 gap-4 items-start mx-auto max-w-screen-lg">
+          <AdvertisementsCards
+              v-for="job in jobs"
+              :key="job.id"
+              :jobTitle="job.jobTitle"
+              :contractType="job.contractType"
+              :shortDescription="job.shortDescription"
+              @clickCard="onSelectJob(job)"
+              class="w-full mt-8"
+          />
+        </div>
+      </section>
     </div>
-  </section>
-  </body>
   </div>
 </template>
 

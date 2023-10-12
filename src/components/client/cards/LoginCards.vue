@@ -1,6 +1,6 @@
 <template>
   <link href='https://fonts.googleapis.com/css?family=Fredoka+One' rel='stylesheet'>
-  <div class="flex items-center justify-center mt-28">
+  <div class="flex items-center justify-center mt-28 ">
     <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
       <h2 class="font-fredoka font-semibold grid justify-items-center text-[#4341C0] text-4xl">
         JOBBOARD
@@ -31,7 +31,9 @@
 
         <p class="mt-10 text-center text-sm text-gray-500">
           Pas membre ?
-          <a href="#" class="font-semibold leading-6 text-[#4341C0] hover:text-indigo-500">S'inscrire</a>
+          <router-link :to="{name: 'registration'}" class="font-semibold leading-6 text-[#4341C0] hover:text-indigo-500">
+            S'inscrire
+          </router-link>
         </p>
       </div>
     </div>

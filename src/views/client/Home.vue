@@ -1,8 +1,8 @@
 <template>
-  <NavBar/>
-  <body class="bg-slate-200 h-screen">
+  <div class="h-screen bg-[#F0F0F0] overflow-hidden m-0 p-0">
+    <NavBar/>
     <section class="flex flex-wrap justify-center gap-4 pt-8">
-      <div class="grid gap-4">
+      <div class="grid gap-4 overflow-auto max-h-[736px] pr-4">
         <AdvertisementsCards
             v-for="job in jobs"
             :key="job.id"
@@ -21,9 +21,8 @@
           :contractType="selectedJob.contractType"
       />
     </section>
-  </body>
+  </div>
 </template>
-
 
 <script setup lang="ts">
 

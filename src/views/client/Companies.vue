@@ -1,9 +1,9 @@
 <template>
   <div :class="$attrs.class" @click="$emit('clickCard')">
-    <div class="flex flex-col h-screen bg-gray-200 m-0 p-0">
+    <div class="h-screen bg-[#F0F0F0] m-0 p-0">
       <NavBar/>
-      <section class="flex-grow p-4 overflow-y-auto">
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-2 gap-4 items-start mx-auto max-w-screen-lg">
+      <section class="flex-grow p-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-2 gap-4 items-start mx-auto max-w-screen-lg overflow-y-auto max-h-[832px]">
           <CompanyCards
               v-for="job in jobs"
               :key="job.id"

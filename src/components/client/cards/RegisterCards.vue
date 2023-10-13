@@ -24,7 +24,6 @@
             </div>
           </div>
 
-
           <div>
             <div class="flex items-center justify-between">
               <label for="password" class="block text-sm font-fredoka font-thin leading-6 text-gray-900"></label>
@@ -61,7 +60,7 @@
           </div>
 
           <div>
-            <router-link  :to="{name: 'home'}" class="flex w-full justify-center rounded-full bg-[#4341C0] px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+            <router-link  :to="{name: 'login'}" class="flex w-full justify-center rounded-full bg-[#4341C0] px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
               Créer un compte
             </router-link>
           </div>
@@ -78,15 +77,14 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue';
+import {computed, ref} from 'vue';
 
 const rawPhoneNumber = ref<string>("");
 
 const formatPhoneNumber = () => {
   let numbers = rawPhoneNumber.value.replace(/\D/g, "");
   numbers = numbers.substring(0, 10);
-  const formatted = numbers.replace(/(\d{2})(?=\d)/g, "$1 ");
-  rawPhoneNumber.value = formatted;
+  rawPhoneNumber.value = numbers.replace(/(\d{2})(?=\d)/g, "$1 ");
 };
 
 const userEnteredPhoneNumber = computed<string>({
@@ -97,5 +95,7 @@ const userEnteredPhoneNumber = computed<string>({
   }
 });
 </script>
+
+
 
 

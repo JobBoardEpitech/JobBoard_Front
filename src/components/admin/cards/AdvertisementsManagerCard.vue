@@ -1,26 +1,77 @@
 <template>
-  <div id="container" class="bg-[#0d121c] text-center rounded-lg mx-auto my-20 w-[calc(90vw-40px)] flex items-center justify-center">
-    <div class="overflow-hidden rounded-lg shadow-md m-5 w-[calc(90vw-60px)] h-[calc(100vh-80px)]">
-      <table class="w-full border-collapse bg-white text-left text-sm text-gray-500">
-        <thead class="bg-gray-50">
-        <tr>
-          <th scope="col" class="px-6 py-4 font-medium text-gray-900">Name</th>
-          <th scope="col" class="px-6 py-4 font-medium text-gray-900">State</th>
-          <th scope="col" class="px-6 py-4 font-medium text-gray-900">Role</th>
-          <th scope="col" class="px-6 py-4 font-medium text-gray-900">Team</th>
-          <th scope="col" class="px-6 py-4 font-medium text-gray-900"></th>
-        </tr>
-        </thead>
-        <tbody class="divide-y divide-gray-100 border-t border-gray-100">
-        <!--  LIST      -->
-        </tbody>
-      </table>
-      <pagination-manager/>
+  <div class="px-4 py-8 sm:px-8 w-full">
+    <div class="flex flex-col overflow-y-hidden rounded-lg border h-full">
+      <div class="overflow-x-auto flex-1">
+        <table class="w-full">
+          <thead class="sticky top-0">
+          <tr class="bg-blue-600 text-left text-xs font-semibold uppercase tracking-widest text-white">
+            <th class="px-5 py-3">ID</th>
+            <th class="px-5 py-3">Advertisements Name</th>
+            <th class="px-5 py-3">Description</th>
+            <th class="px-5 py-3">Short Description</th>
+            <th class="px-5 py-3">Contract Type</th>
+            <th class="px-5 py-3">Actions</th>
+          </tr>
+          </thead>
+          <tbody class="text-gray-500">
+          <tr
+              v-for="advertisement in props.advertisements"
+              :key="advertisement.id"
+          >
+            <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
+              <p class="whitespace-no-wrap">
+                {{advertisement.id}}
+              </p>
+            </td>
+            <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
+              <div class="flex items-center">
+                <p class="whitespace-no-wrap">
+                  {{ advertisement.name }}
+                </p>
+              </div>
+            </td>
+            <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
+              <p class="whitespace-no-wrap truncate">
+                {{ advertisement.description }}
+              </p>
+            </td>
+            <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
+              <p class="whitespace-no-wrap truncate">
+                {{ advertisement.short_description }}
+              </p>
+            </td>
+            <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
+              <p class="whitespace-no-wrap">
+                {{ advertisement.contract_type }}
+              </p>
+            </td>
+            <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
+              <button>
+                D
+              </button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="flex flex-col items-center border-t px-5 pt-5 sm:flex-row sm:justify-between">
+        <span class="text-xs text-gray-600 sm:text-sm"> Showing 1 to 5 of 12 Entries </span>
+        <div class="mt-2 inline-flex sm:mt-0">
+          <button class="mr-2 h-12 w-12 rounded-full border text-sm font-semibold text-gray-600 transition duration-150 hover:bg-gray-100">Prev</button>
+          <button class="h-12 w-12 rounded-full border text-sm font-semibold text-gray-600 transition duration-150 hover:bg-gray-100">Next</button>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import {PropType} from "vue";
+import {Advertisement} from "@/services/advertisements";
 
-import PaginationManager from "@/components/admin/pagination/PaginationManager.vue";
+const props = defineProps({
+  advertisements: {
+    type: Array as PropType<Advertisement[]>
+  }
+})
 </script>

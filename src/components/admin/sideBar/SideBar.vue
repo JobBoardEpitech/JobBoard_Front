@@ -1,56 +1,42 @@
 <template>
-  <header class="bg-[#0d121c] h-[calc(100vh-40px)] py-8 px-4 flex flex-col justify-between items-start rounded-lg w-52">
-    <nav class="flex flex-col gap-8">
-      <div class="group flex flex-col gap-4">
-        <h3 class="font-semibold text-gray-400 tracking-wider uppercase text-sm">Groups</h3>
-        <ul class="menu flex flex-col gap-2">
-          <li class="menu-item flex gap-2 cursor-pointer py-1 px-2 rounded-l-md text-xs leading-5 h-[34px] text-white">
-            <div class="icon flex justify-center items-center w-6 h-6 bg-blue-500 rounded">
-              <i class="ti ti-user text-white text-base"></i>
-            </div>
-            <router-link to="client-manager">Client Manager</router-link>
-          </li>
-          <li class="menu-item flex gap-2 cursor-pointer py-1 px-2 rounded-l-md text-sm leading-5 h-[34px] text-white">
-            <div class="icon flex justify-center items-center w-6 h-6 bg-yellow-500 rounded">
-              <i class="ti ti-speakerphone text-white text-base"></i>
-            </div>
-            <router-link to="advertisements-manager">Advertisements</router-link>
-          </li>
-          <li class="menu-item flex gap-2 cursor-pointer py-1 px-2 rounded-l-md text-sm leading-5 h-[34px] text-white">
-            <div class="icon flex justify-center items-center w-6 h-6 bg-green-500 rounded">
-              <i class="ti ti-package text-white text-base"></i>
-            </div>
-            <router-link to="companies-manager">Companies</router-link>
-          </li>
-        </ul>
-      </div>
-      <div class="group flex flex-col gap-4">
-        <h3 class="font-semibold text-gray-400 tracking-wider uppercase text-sm">About Me</h3>
-        <ul class="menu flex flex-col gap-2">
-          <li class="menu-item flex gap-2 cursor-pointer py-1 px-2 rounded-l-md text-xs leading-5 h-[34px] text-white">
-            <div class="icon flex justify-center items-center w-6 h-6 bg-orange-500 rounded">
-              <i class="ti ti-user text-white text-base"></i>
-            </div>
-            <span>My Account</span>
-          </li>
-          <li class="menu-item flex gap-2 cursor-pointer py-1 px-2 rounded-l-md text-sm leading-5 h-[34px] text-white">
-            <div class="icon flex justify-center items-center w-6 h-6 bg-pink-500 rounded">
-              <i class="ti ti-settings-filled text-white text-base"></i>
-            </div>
-            <span>Settings</span>
-          </li>
-        </ul>
-      </div>
-    </nav>
-    <div class="user flex gap-2 items-center w-full pt-4 border-t border-gray-700">
-      <div class="avatar w-7 h-7 bg-cover rounded-full" style="background-image: url('https://i.pravatar.cc/300');"></div>
-      <div class="info flex flex-col">
-        <h6 class="text-sm text-white">Admin</h6>
-        <span class="text-xs text-gray-400">@username</span>
-      </div>
-    </div>
-  </header>
+  <link rel="stylesheet" href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" />
+  <link href='https://fonts.googleapis.com/css?family=Fredoka+One' rel='stylesheet'>
 
+  <div class="min-h-screen flex flex-row bg-gray-100">
+    <div class="flex flex-col w-56 bg-white rounded-r-3xl overflow-hidden">
+      <div class="flex items-center justify-center h-20 shadow-md">
+        <a href="/" class="font-fredoka font-semibold flex items-center text-[#4341C0] text-2xl">
+          JOBBOARD
+        </a>
+      </div>
+      <ul class="flex flex-col py-4">
+        <li>
+          <a href="#" class="flex flex-row items-center h-12 transform hover:translate-x-2 transition-transform ease-in duration-200 text-gray-500 hover:text-gray-800">
+            <span class="inline-flex items-center justify-center h-12 w-12 text-lg text-gray-400"><i class="bx bx-user"></i></span>
+            <span class="text-sm font-medium">Users</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" class="flex flex-row items-center h-12 transform hover:translate-x-2 transition-transform ease-in duration-200 text-gray-500 hover:text-gray-800">
+            <span class="inline-flex items-center justify-center h-12 w-12 text-lg text-gray-400"><i class="bx bx-notepad"></i></span>
+            <span class="text-sm font-medium">Advertisements</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" class="flex flex-row items-center h-12 transform hover:translate-x-2 transition-transform ease-in duration-200 text-gray-500 hover:text-gray-800">
+            <span class="inline-flex items-center justify-center h-12 w-12 text-lg text-gray-400"><i class="bx bx-building-house"></i></span>
+            <span class="text-sm font-medium">Companies</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" class="flex flex-row items-center h-12 transform hover:translate-x-2 transition-transform ease-in duration-200 text-gray-500 hover:text-gray-800">
+            <span class="inline-flex items-center justify-center h-12 w-12 text-lg text-gray-400"><i class="bx bx-log-out"></i></span>
+            <span class="text-sm font-medium">Logout</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
 </template>
 
 

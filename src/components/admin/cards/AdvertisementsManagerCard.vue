@@ -54,9 +54,9 @@
           </tbody>
         </table>
       </div>
-      <div class="flex flex-col items-center border-t px-5 pt-5 sm:flex-row sm:justify-between">
-        <span class="text-xs text-gray-600 sm:text-sm"> Showing 1 to 5 of 12 Entries </span>
-        <div class="mt-2 inline-flex sm:mt-0">
+      <div class="flex flex-col items-center border-t px-5 pt-5 sm:flex-row sm:justify-between pb-2">
+        <span class="text-xs text-gray-600 sm:text-sm pb-2"> Showing 1 to 5 of 12 Entries </span>
+        <div class="mt-2 inline-flex sm:mt-0 pb-2">
           <button class="mr-2 h-12 w-12 rounded-full border text-sm font-semibold text-gray-600 transition duration-150 hover:bg-gray-100">Prev</button>
           <button class="h-12 w-12 rounded-full border text-sm font-semibold text-gray-600 transition duration-150 hover:bg-gray-100">Next</button>
         </div>

@@ -1,5 +1,5 @@
 <template>
-  <div class="h-screen flex bg-gray-200">
+  <div class="h-screen flex bg-[#f0f0f0]">
     <SideBar/>
     <UserClientCard
         :users="users"

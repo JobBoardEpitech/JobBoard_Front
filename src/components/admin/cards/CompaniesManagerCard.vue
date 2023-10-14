@@ -1,6 +1,6 @@
 <template>
-  <div class="px-4 py-8 sm:px-8 w-full">
-    <div class="flex flex-col overflow-y-hidden rounded-lg border h-full">
+  <div class="px-4 py-8 sm:px-8 w-full ">
+    <div class="flex flex-col overflow-y-hidden rounded-lg border h-full bg-white">
       <div class="overflow-x-auto flex-1">
         <table class="w-full">
           <thead class="sticky top-0">

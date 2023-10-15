@@ -8,6 +8,10 @@ import Advertisements from "@/views/client/Advertisements.vue";
 import Registration from "@/views/client/Registration.vue";
 import Companies from "@/views/client/Companies.vue";
 import TestView from "@/views/TestView.vue";
+import ModifyAdvertisementsCard from "@/components/admin/cards/ModifyAdvertisementsCard.vue";
+import ModifyAdvertisementsView from "@/views/admin/ModifyAdvertisementsView.vue";
+import ModifyUserView from "@/views/admin/ModifyUserView.vue";
+import ModifyCompaniesView from "@/views/admin/ModifyCompaniesView.vue";
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -57,12 +61,28 @@ const router = createRouter({
             name: 'advertisements-manager',
             component: AdvertisementsManager
         },
+        {
+            path: '/dashboard/client-manager/modify-client',
+            name: 'client-manager-modify',
+            component: ModifyUserView
+        },
+        {
+            path: '/dashboard/advertisements-manager/modify-advertisements',
+            name: 'advertisements-manager-modify',
+            component: ModifyAdvertisementsView
+        },
+        {
+            path: '/dashboard/companies-manager/modify-company',
+            name: 'companies-manager-modify',
+            component: ModifyCompaniesView
+        },
+
 
         //TEST
         {
             path: '/test',
             name: 'test',
-            component: TestView
+            component: ModifyCompaniesView
         },
     ]
 })

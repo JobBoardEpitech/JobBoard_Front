@@ -26,9 +26,9 @@
             </td>
             <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
               <div class="flex items-center">
-                  <p class="whitespace-no-wrap">
+                  <router-link :to="{name: 'client-manager-modify'}" class="whitespace-no-wrap">
                     {{ `${user.firstName} ${user.name}` }}
-                  </p>
+                  </router-link>
               </div>
             </td>
             <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">

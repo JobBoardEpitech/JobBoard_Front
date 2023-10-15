@@ -39,6 +39,10 @@ const router = createRouter({
         },
         // ADMIN
         {
+            path: '/dashboard',
+            redirect: '/dashboard/client-manager',
+        },
+        {
             path: '/dashboard/client-manager',
             name: 'client-manager',
             component: ClientManager

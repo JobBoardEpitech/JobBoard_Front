@@ -7,6 +7,7 @@ import Login from "@/views/client/Login.vue";
 import Advertisements from "@/views/client/Advertisements.vue";
 import Registration from "@/views/client/Registration.vue";
 import Companies from "@/views/client/Companies.vue";
+import TestView from "@/views/TestView.vue";
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -47,11 +48,18 @@ const router = createRouter({
             name: 'companies-manager',
             component: CompaniesManager
         },
-      {
-        path: '/dashboard/advertisements-manager',
-        name: 'advertisements-manager',
-        component: AdvertisementsManager
-      },
+        {
+            path: '/dashboard/advertisements-manager',
+            name: 'advertisements-manager',
+            component: AdvertisementsManager
+        },
+
+        //TEST
+        {
+            path: '/test',
+            name: 'test',
+            component: TestView
+        },
     ]
 })
 

@@ -19,8 +19,8 @@ module.exports = {
                 }
             },
             fontFamily: {
-                'fredoka': ['Fredoka One', 'sans-serif'],
-                'inter': ['Inter', 'sans-serif'],
+                'fredoka': ['Fredoka One', 'ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, "Noto Sans", sans-serif'],
+                'inter': ['Inter', 'ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, "Noto Sans", sans-serif'],
             },
         },
     },

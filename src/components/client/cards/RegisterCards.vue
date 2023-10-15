@@ -6,64 +6,62 @@
         JOBBOARD
       </h2>
       <div class="mt-10 sm:mx-auto w-full">
-
         <form class="space-y-6" action="#" method="POST">
+            <JobInput
+                :value="values.firstname"
+                id="firstname"
+                type="text"
+                required
+                placeholder="Prénom"
+                @update:value="values.firstname = $event"
 
-          <div>
-            <div class="mt-2">
-              <input id="password" name="firstname" type="text" required class="border-indigo-600 block w-full rounded-md border-2 py-1.5 text-gray-900 shadow-sm  placeholder:text-gray-400 pl-[14px] sm:text-sm sm:leading-6 " placeholder="Prénom">
-            </div>
-          </div>
+            />
 
-          <div>
-            <div class="flex items-center justify-between">
-              <label for="password" class="block text-sm font-fredoka font-thin leading-6 text-gray-900"></label>
-            </div>
-            <div class="mt-2">
-              <input id="password" name="name" type="text" required class="border-indigo-600 block w-full rounded-md border-2 py-1.5 text-gray-900 shadow-sm  placeholder:text-gray-400 pl-[14px] sm:text-sm sm:leading-6 " placeholder="Nom">
-            </div>
-          </div>
+          <JobInput
+              :value="values.name"
+              id="name"
+              type="text"
+              required
+              placeholder="Nom"
+              @update:value="values.name = $event"
 
-          <div>
-            <div class="flex items-center justify-between">
-              <label for="password" class="block text-sm font-fredoka font-thin leading-6 text-gray-900"></label>
-            </div>
-            <div class="mt-2">
-              <input
-                  id="phone-number"
-                  v-model="userEnteredPhoneNumber"
-                  @input="formatPhoneNumber"
-                  name="phone-number"
-                  type="tel"
-                  required
-                  class="border-indigo-600 block w-full rounded-md border-2 py-1.5 text-gray-900 shadow-sm  placeholder:text-gray-400 pl-[14px] sm:text-sm sm:leading-6 "
-                  placeholder="Numéro">
-            </div>
-          </div>
+          />
 
-          <div>
-            <div class="flex items-center justify-between">
-              <label for="password" class="block text-sm font-fredoka font-thin leading-6 text-gray-900"></label>
-            </div>
-            <div class="mt-2">
-              <input id="password" name="email" type="email" required class="border-indigo-600 block w-full rounded-md border-2 py-1.5 text-gray-900 shadow-sm  placeholder:text-gray-400 pl-[14px] sm:text-sm sm:leading-6 " placeholder="Email">
-            </div>
-          </div>
+          <JobInput
+              :value="values.phoneNumber"
+              :maxlength="14"
+              id="phone-number"
+              type="tel"
+              required
+              placeholder="Numéro"
+              @update:value="onPhoneNumberInput"
+          />
 
-          <div>
-            <div class="flex items-center justify-between">
-              <label for="password" class="block text-sm font-fredoka font-thin leading-6 text-gray-900"></label>
-            </div>
-            <div class="mt-2">
-              <input id="password" name="password" type="password" autocomplete="current-password" required class="border-indigo-600 block w-full rounded-md border-2 py-1.5 text-gray-900 shadow-sm  placeholder:text-gray-400 pl-[14px] sm:text-sm sm:leading-6 " placeholder="Password">
-            </div>
-          </div>
+          <JobInput
+              :value="values.email"
+              id="email"
+              type="email"
+              autocomplete="email"
+              required
+              placeholder="Email"
+              @update:value="values.email = $event"
+          />
 
-          <div>
+          <JobInput
+              :value="values.password"
+              id="password"
+              type="password"
+              autocomplete="current-password"
+              required
+              placeholder="Password"
+              @update:value="values.password = $event"
+
+          />
+
             <router-link  :to="{name: 'login'}" class="flex w-full justify-center rounded-full bg-[#4341C0] px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
               Créer un compte
             </router-link>
-          </div>
+
         </form>
         <p class="mt-10 text-center text-sm text-gray-500">
           Vous avez déjà un compte ?
@@ -77,23 +75,24 @@
 </template>
 
 <script setup lang="ts">
-import {computed, ref} from 'vue';
+import {ref} from 'vue';
+import JobInput from "@/components/common/JobInput.vue";
 
-const rawPhoneNumber = ref<string>("");
+const values = ref({
+  email:"",
+  password:"",
+  phoneNumber:"",
+  name:"",
+  firstname:""
+})
 
-const formatPhoneNumber = () => {
-  let numbers = rawPhoneNumber.value.replace(/\D/g, "");
-  numbers = numbers.substring(0, 10);
-  rawPhoneNumber.value = numbers.replace(/(\d{2})(?=\d)/g, "$1 ");
+//Methods
+
+const onPhoneNumberInput = (phoneNumber: string) => {
+  let numbers = phoneNumber.replace(/\D/g, "");
+  numbers = numbers.substring(0, 10); // Limiter à 10 chiffres
+  values.value.phoneNumber = numbers.replace(/(\d{2})(?=\d)/g, "$1 ");
 };
-
-const userEnteredPhoneNumber = computed<string>({
-  get: () => rawPhoneNumber.value,
-  set: (value: string) => {
-    rawPhoneNumber.value = value;
-    formatPhoneNumber();
-  }
-});
 </script>
 
 

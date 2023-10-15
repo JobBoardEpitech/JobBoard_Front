@@ -7,23 +7,27 @@
       </h2>
       <div class="mt-10 sm:mx-auto w-full">
 
-        <form class="space-y-6" action="#" method="POST">
-          <div>
-            <label for="email" class="block text-sm font-fredoka font-thin leading-6 text-gray-900 "></label>
-            <div class="mt-2">
-              <input id="email" name="email" type="email" autocomplete="email"  required class="border-indigo-600 block w-full rounded-md border-2 py-1.5 text-gray-900 shadow-sm  placeholder:text-gray-400 pl-[14px] sm:text-sm sm:leading-6" placeholder="Email">
-            </div>
-          </div>
+        <form class="space-y-6" @submit.prevent="handleSubmit">
+              <JobInput
+                  :value="values.email"
+                  id="email"
+                  type="email"
+                  autocomplete="email"
+                  required
+                  placeholder="Email"
+                  @update:value="values.email = $event"
+              />
 
-          <div>
-            <div class="flex items-center justify-between">
-              <label for="password" class="block text-sm font-fredoka font-thin leading-6 text-gray-900"></label>
-            </div>
-            <div class="mt-2">
-              <input id="password" name="password" type="password" autocomplete="current-password" required class="border-indigo-600 block w-full rounded-md border-2 py-1.5 text-gray-900 shadow-sm  placeholder:text-gray-400 pl-[14px] sm:text-sm sm:leading-6 " placeholder="Password">
-            </div>
-          </div>
+              <JobInput
+                  :value="values.password"
+                  id="password"
+                  type="password"
+                  autocomplete="current-password"
+                  required
+                  placeholder="Password"
+                  @update:value="values.password = $event"
 
+              />
           <div>
             <button type="submit" class="flex w-full justify-center rounded-full bg-[#4341C0] px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Se connecter</button>
           </div>
@@ -41,5 +45,17 @@
 </template>
 
 <script setup lang="ts">
+import JobInput from "@/components/common/JobInput.vue";
+import {ref} from "vue";
 
+const values = ref({
+  email:"",
+  password:""
+})
+
+//Methods
+
+const handleSubmit = () => {
+  console.log(values.value)
+}
 </script>

@@ -12,6 +12,7 @@ import ModifyAdvertisementsCard from "@/components/admin/cards/ModifyAdvertiseme
 import ModifyAdvertisementsView from "@/views/admin/ModifyAdvertisementsView.vue";
 import ModifyUserView from "@/views/admin/ModifyUserView.vue";
 import ModifyCompaniesView from "@/views/admin/ModifyCompaniesView.vue";
+import AddAdvertisements from "@/views/client/AddAdvertisements.vue";
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -40,6 +41,11 @@ const router = createRouter({
             path: '/companies',
             name: 'companies',
             component: Companies
+        },
+        {
+            path: '/add-advertisements',
+            name: 'add-advertisements',
+            component: AddAdvertisements
         },
         // ADMIN
         {
@@ -82,7 +88,7 @@ const router = createRouter({
         {
             path: '/test',
             name: 'test',
-            component: ModifyCompaniesView
+            component: AddAdvertisements
         },
     ]
 })

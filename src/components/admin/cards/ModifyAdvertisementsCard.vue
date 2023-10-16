@@ -1,5 +1,6 @@
 <template>
-    <div class="py-8 px-4 mx-auto lg:py-16">
+  <div class="w-full">
+    <div class="py-8 px-4 mx-auto lg:py-16 w-[30vw]">
       <h2 class="mb-4 text-xl font-bold text-gray-900">Modify Advertisements</h2>
       <form action="#">
         <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
@@ -61,6 +62,7 @@
         </button>
       </form>
     </div>
+  </div>
 </template>
 
 <script setup lang="ts">

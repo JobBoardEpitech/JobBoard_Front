@@ -8,7 +8,17 @@
 </template>
 <script setup lang="ts">
 import SideBar from "@/components/admin/sideBar/SideBar.vue";
+import {onMounted, ref} from "vue";
 import UserClientCard from "@/components/admin/cards/UserClientCard.vue";
-import {users} from "@/services/user";
+import {fetchUsers} from "@/services/user";
 
+const users = ref([]);
+
+onMounted(async () => {
+  try {
+    users.value = await fetchUsers();
+  } catch (error) {
+    console.error("Erreur lors de la récupération des annonces:", error);
+  }
+});
 </script>

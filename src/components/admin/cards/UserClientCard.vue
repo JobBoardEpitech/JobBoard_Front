@@ -27,13 +27,13 @@
             <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
               <div class="flex items-center">
                   <router-link :to="{name: 'client-manager-modify'}" class="whitespace-no-wrap">
-                    {{ `${user.firstName} ${user.name}` }}
+                    {{ `${user.first_name} ${user.name}` }}
                   </router-link>
               </div>
             </td>
             <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
               <span class="rounded-full bg-green-200 px-3 py-1 text-xs font-semibold text-green-900">
-                {{user.user_role}}
+                {{user.roleId}}
               </span>
             </td>
             <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">

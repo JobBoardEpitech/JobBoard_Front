@@ -5,10 +5,10 @@
         <img loading="lazy" src="src/assets/img/image5.png" class="w-12 h-12 object-cover object-center" alt=""/>
         <div class="flex flex-col flex-grow">
           <h2 class="text-black text-sm font-semibold">
-            {{props.companyName}}
+            {{name}}
           </h2>
           <p class="text-neutral-500 text-xs font-medium mt-2 line-clamp-2">
-            {{props.shortDescription}}
+            {{short_description}}
           </p>
         </div>
         <img loading="lazy" src="src/assets/img/image6.png" class="w-5 h-5" alt="Icon" />
@@ -17,22 +17,18 @@
   </section>
 </template>
 
+
 <script setup lang="ts">
+import { Company } from '@/services/companies';
 
-// Props
+// Define the props
 const props = defineProps({
-  companyName: {
-    type: String,
-    required: true
-  },
-  shortDescription: {
-    type: String,
-    required: true
-  }
+  id: Number,
+  name: String,
+  short_description: String,
+});
 
-})
-
-// EMIT
-const emit = defineEmits(['clickCard'])
+const emit = defineEmits(['clickCard']);
 </script>
+
 

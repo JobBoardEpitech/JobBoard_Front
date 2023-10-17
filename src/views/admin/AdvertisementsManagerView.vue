@@ -7,7 +7,17 @@
   </div>
 </template>
 <script setup lang="ts">
-import {advertisements} from "@/services/advertisements";
-import SideBar from "@/components/admin/sideBar/SideBar.vue";
+import { ref, onMounted } from "vue";
+import {fetchAdvertisements} from "@/services/advertisements";
 import AdvertisementsManagerCard from "@/components/admin/cards/AdvertisementsManagerCard.vue";
+import SideBar from "@/components/admin/sideBar/SideBar.vue";
+const advertisements = ref([]);
+
+onMounted(async () => {
+  try {
+    advertisements.value = await fetchAdvertisements();
+  } catch (error) {
+    console.error("Erreur lors de la récupération des annonces:", error);
+  }
+});
 </script>

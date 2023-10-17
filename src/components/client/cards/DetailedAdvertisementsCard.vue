@@ -8,58 +8,41 @@
             {{props.companyName}}
           </div>
           <h1 class="text-black text-lg font-semibold w-full md:w-96 mt-2">
-            {{props.jobTitle}}
+            {{name}}
           </h1>
         </div>
         <img loading="lazy" src="src/assets/img/image6.png" class="object-cover object-center w-5 mt-2" alt=""/>
       </header>
       <h2 class="text-black text-sm font-semibold w-full md:w-64 mt-14">Aperçu du projet</h2>
       <p class="text-neutral-500 text-xs font-medium w-full md:w-96 mt-3">
-        {{props.longDescription}}
+        {{long_description}}
       </p>
       <h2 class="text-black text-sm font-semibold w-full md:w-64 mt-7">Type de Contrat</h2>
       <Badge class="mt-2">
-        {{props.contractType}}
+        {{contract_type}}
       </Badge>
-      <button
-          :disabled="props.hasUserApplied"
-          type="submit"
-          :class="props.hasUserApplied ? 'bg-indigo-200 text-gray-500 cursor-not-allowed' : 'bg-indigo-600 hover:bg-indigo-500 text-white'"
-          class="flex font-semibold justify-center w-[12rem] md:max-w-[12rem] mt-12 px-5 py-3 rounded-full text-center text-sm self-center">
-        {{props.hasUserApplied ? "Vous avez déjà postulé" : "Postuler"}}
-      </button>
+<!--      <button-->
+<!--          :disabled="props.hasUserApplied"-->
+<!--          type="submit"-->
+<!--          :class="props.hasUserApplied ? 'bg-indigo-200 text-gray-500 cursor-not-allowed' : 'bg-indigo-600 hover:bg-indigo-500 text-white'"-->
+<!--          class="flex font-semibold justify-center w-[12rem] md:max-w-[12rem] mt-12 px-5 py-3 rounded-full text-center text-sm self-center">-->
+<!--        {{props.hasUserApplied ? "Vous avez déjà postulé" : "Postuler"}}-->
+<!--      </button>-->
     </section>
   </div>
 </template>
 
 <script setup lang="ts">
-
 import Badge from "@/components/client/badge/Badge.vue";
+import { Advertisement } from '@/services/advertisements';
 
-// Props
+// Define the props
 const props = defineProps({
-  companyName: {
-    type: String,
-    required: true
-  },
-  jobTitle: {
-    type: String,
-    required: true
-  },
-  longDescription: {
-    type: String,
-    required: true
-  },
-  contractType: {
-    type: String,
-    required: true
-  },
-  hasUserApplied: {
-    type: Boolean,
-    required: true,
-    default: false,
-  }
-})
+  id: Number,
+  name: String,
+  long_description: String,
+  contract_type: String
+});
 
-
+const emit = defineEmits(['clickCard']);
 </script>

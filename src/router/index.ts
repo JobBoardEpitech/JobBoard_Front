@@ -6,7 +6,7 @@ import Home from "@/views/client/Home.vue";
 import Login from "@/views/client/Login.vue";
 import Advertisements from "@/views/client/Advertisements.vue";
 import Registration from "@/views/client/Registration.vue";
-import Companies from "@/views/client/Companies.vue";
+import Companies from "@/views/client/CompaniesViews.vue";
 import TestView from "@/views/TestView.vue";
 import ModifyAdvertisementsCard from "@/components/admin/cards/ModifyAdvertisementsCard.vue";
 import ModifyAdvertisementsView from "@/views/admin/ModifyAdvertisementsView.vue";

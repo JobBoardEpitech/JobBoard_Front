@@ -32,12 +32,12 @@
             </td>
             <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
               <p class="whitespace-no-wrap truncate">
-                {{ advertisement.description }}
+                {{ truncateText(advertisement.description, 30) }}
               </p>
             </td>
             <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
               <p class="whitespace-no-wrap truncate">
-                {{ advertisement.short_description }}
+                {{ truncateText(advertisement.short_description, 20)}}
               </p>
             </td>
             <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
@@ -66,12 +66,18 @@
 </template>
 
 <script setup lang="ts">
-import {PropType} from "vue";
-import {Advertisement} from "@/services/advertisements";
+import Badge from "@/components/client/badge/Badge.vue";
+import { Advertisement } from '@/services/advertisements';
 
+// Define the props
 const props = defineProps({
-  advertisements: {
-    type: Array as PropType<Advertisement[]>
-  }
-})
+  advertisements: Array
+});
+
+const truncateText = (text, limit = 100) => {
+  if (text.length <= limit) return text;
+  return text.substring(0, limit) + '...';
+}
+
+const emit = defineEmits(['clickCard']);
 </script>

@@ -33,20 +33,29 @@
     </nav>
       <!-- BUTTON LOGIN  -->
     <div class="flex justify-end gap-4">
-      <router-link :to="{name: 'add-advertisements'}" role="button" class="bg-[#4341C0] hover:bg-indigo-500 text-white font-fredoka py-2 px-4 rounded-3xl w-[14vw] text-xl text-center inline-flex items-center justify-center gap-2">
+      <router-link
+          v-if="isRecruiter"
+          :to="{name: 'add-advertisements'}"
+          role="button"
+          class="bg-[#4341C0] hover:bg-indigo-500 text-white font-fredoka py-2 px-4 rounded-3xl w-[14vw] text-xl text-center inline-flex items-center justify-center gap-2">
         <i class="bx bx-plus"></i>
         Ajouter une annonce
       </router-link>
-      <router-link :to="{name: 'login'}" role="button" class="bg-[#4341C0] hover:bg-indigo-500 text-white font-fredoka py-2 px-4 rounded-3xl w-44 text-xl text-center">
-        LOGIN
-      </router-link>
+      <button
+          @click="handleLogout"
+          class="bg-[#4341C0] hover:bg-indigo-500 text-white font-fredoka py-2 px-4 rounded-3xl w-44 text-xl text-center"
+      >
+        LOGOUT
+      </button>
+
     </div>
   </header>
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
 import { useRoute } from 'vue-router';
+import { logout} from "@/services/auth";
+import router from "@/router";
 
 const route = useRoute();
 
@@ -56,4 +65,23 @@ const getLinkClasses = (name: string) => {
     'text-[#4341C0]': route.name === name,
   };
 };
+
+const handleLogout = async () => {
+  try {
+    const token = localStorage.getItem('auth_token');
+    if (token) {
+      await logout(token);
+    }
+  } catch (error) {
+    console.error("Erreur lors de la déconnexion:", error);
+  } finally {
+    localStorage.removeItem('auth_token');
+    await router.push({name: 'login'});
+  }
+};
+console.log(localStorage.getItem('user_info') )
+const userInfo = JSON.parse(localStorage.getItem('user_info') || '{}');
+const userRole = userInfo.role_id;
+const isRecruiter = userRole === 3;
+
 </script>

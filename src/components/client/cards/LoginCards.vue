@@ -46,16 +46,23 @@
 
 <script setup lang="ts">
 import JobInput from "@/components/common/JobInput.vue";
+import { login } from '@/services/auth';
+import router from "@/router";
 import {ref} from "vue";
 
 const values = ref({
-  email:"",
-  password:""
-})
+  email: "",
+  password: "",
+  errorMessage: ""
+});
 
-//Methods
-
-const handleSubmit = () => {
-  console.log(values.value)
-}
+const handleSubmit = async () => {
+  try {
+    const data = await login(values.value);
+    localStorage.setItem('auth_token', data.token);
+    await router.push('/');
+  } catch (error) {
+    values.value.errorMessage = 'Erreur de connexion. Vérifiez vos identifiants.';
+  }
+};
 </script>

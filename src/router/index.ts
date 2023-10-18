@@ -2,13 +2,10 @@ import {createRouter, createWebHistory} from 'vue-router'
 import ClientManager from "@/views/admin/ClientManagerView.vue";
 import CompaniesManager from "@/views/admin/CompaniesManagerView.vue";
 import AdvertisementsManager from "@/views/admin/AdvertisementsManagerView.vue";
-import Home from "@/views/client/Home.vue";
 import Login from "@/views/client/Login.vue";
 import Advertisements from "@/views/client/Advertisements.vue";
 import Registration from "@/views/client/Registration.vue";
 import Companies from "@/views/client/CompaniesViews.vue";
-import TestView from "@/views/TestView.vue";
-import ModifyAdvertisementsCard from "@/components/admin/cards/ModifyAdvertisementsCard.vue";
 import ModifyAdvertisementsView from "@/views/admin/ModifyAdvertisementsView.vue";
 import ModifyUserView from "@/views/admin/ModifyUserView.vue";
 import ModifyCompaniesView from "@/views/admin/ModifyCompaniesView.vue";
@@ -21,31 +18,37 @@ const router = createRouter({
         {
             path: '/',
             redirect: 'advertisements',
+            meta: { requiresAuth: true }
         },
         {
             path: '/login',
             name: 'login',
-            component: Login
+            component: Login,
+            meta: { requiresUnauth: true }
         },
         {
             path: '/registration',
             name: 'registration',
-            component: Registration
+            component: Registration,
+            meta: { requiresUnauth: true }
         },
         {
             path: '/advertisements',
             name: 'advertisements',
-            component: Advertisements
+            component: Advertisements,
+            meta: { requiresAuth: true }
         },
         {
             path: '/companies',
             name: 'companies',
-            component: Companies
+            component: Companies,
+            meta: { requiresAuth: true }
         },
         {
             path: '/add-advertisements',
             name: 'add-advertisements',
-            component: AddAdvertisements
+            component: AddAdvertisements,
+            meta: { requiresAuth: true }
         },
         // ADMIN
         {
@@ -90,7 +93,31 @@ const router = createRouter({
             name: 'test',
             component: AddAdvertisements
         },
+
     ]
 })
+
+router.beforeEach((to, from, next) => {
+    const isAuthenticated = localStorage.getItem('auth_token');
+    if (to.matched.some(record => record.meta.requiresAuth)) {
+        if (!isAuthenticated) {
+            next({ name: 'login' });
+        } else {
+            next();
+        }
+    }
+    else if (to.matched.some(record => record.meta.requiresUnauth)) {
+        if (isAuthenticated) {
+            next({ name: 'advertisements' });
+        } else {
+            next();
+        }
+    }
+    else {
+        next();
+    }
+});
+
+
 
 export default router

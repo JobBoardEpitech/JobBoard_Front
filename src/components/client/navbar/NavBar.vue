@@ -54,7 +54,7 @@
 
 <script setup lang="ts">
 import { useRoute } from 'vue-router';
-import { logout} from "@/services/auth";
+import { logout } from "@/services/auth";
 import router from "@/router";
 
 const route = useRoute();
@@ -79,9 +79,21 @@ const handleLogout = async () => {
     await router.push({name: 'login'});
   }
 };
-console.log(localStorage.getItem('user_info') )
-const userInfo = JSON.parse(localStorage.getItem('user_info') || '{}');
-const userRole = userInfo.role_id;
+
+console.log("Contenu de user_info:", localStorage.getItem('user_info'));
+
+let userInfo = {};
+const rawUserInfo = localStorage.getItem('user_info');
+
+if (rawUserInfo && rawUserInfo.trim().startsWith('{')) {
+  try {
+    userInfo = JSON.parse(rawUserInfo);
+  } catch (error) {
+    console.error("Erreur lors de la conversion de user_info en objet:", error);
+  }
+}
+
+const userRole = userInfo.role_id || null;
 const isRecruiter = userRole === 3;
 
 </script>

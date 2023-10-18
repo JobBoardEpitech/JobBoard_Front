@@ -44,25 +44,38 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts">
+import { ref } from "vue";
 import JobInput from "@/components/common/JobInput.vue";
 import { login } from '@/services/auth';
 import router from "@/router";
-import {ref} from "vue";
 
-const values = ref({
-  email: "",
-  password: "",
-  errorMessage: ""
-});
+export default {
+  components: {
+    JobInput,
+  },
+  setup() {
+    const values = ref({
+      email: "",
+      password: "",
+      errorMessage: ""
+    });
 
-const handleSubmit = async () => {
-  try {
-    const data = await login(values.value);
-    localStorage.setItem('auth_token', data.token);
-    await router.push('/');
-  } catch (error) {
-    values.value.errorMessage = 'Erreur de connexion. Vérifiez vos identifiants.';
+    const handleSubmit = async () => {
+      try {
+        const data = await login(values.value);
+        localStorage.setItem('auth_token', data.token);
+        await router.push('/');
+      } catch (error) {
+        values.value.errorMessage = 'Erreur de connexion. Vérifiez vos identifiants.';
+      }
+    };
+
+    return {
+      values,
+      handleSubmit,
+    };
   }
 };
 </script>
+

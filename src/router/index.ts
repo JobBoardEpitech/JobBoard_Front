@@ -54,36 +54,43 @@ const router = createRouter({
         {
             path: '/dashboard',
             redirect: '/dashboard/client-manager',
+            meta: { requiresAdmin: true }
         },
         {
             path: '/dashboard/client-manager',
             name: 'client-manager',
-            component: ClientManager
+            component: ClientManager,
+            meta: { requiresAdmin: true }
         },
         {
             path: '/dashboard/companies-manager',
             name: 'companies-manager',
-            component: CompaniesManager
+            component: CompaniesManager,
+            meta: { requiresAdmin: true }
         },
         {
             path: '/dashboard/advertisements-manager',
             name: 'advertisements-manager',
-            component: AdvertisementsManager
+            component: AdvertisementsManager,
+            meta: { requiresAdmin: true }
         },
         {
             path: '/dashboard/client-manager/modify-client',
             name: 'client-manager-modify',
-            component: ModifyUserView
+            component: ModifyUserView,
+            meta: { requiresAdmin: true }
         },
         {
             path: '/dashboard/advertisements-manager/modify-advertisements',
             name: 'advertisements-manager-modify',
-            component: ModifyAdvertisementsView
+            component: ModifyAdvertisementsView,
+            meta: { requiresAdmin: true }
         },
         {
             path: '/dashboard/companies-manager/modify-company',
             name: 'companies-manager-modify',
-            component: ModifyCompaniesView
+            component: ModifyCompaniesView,
+            meta: { requiresAdmin: true }
         },
 
 
@@ -98,26 +105,26 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-    const isAuthenticated = localStorage.getItem('auth_token');
+    const isAuthenticated = !!localStorage.getItem('auth_token');  // Convertit en boolean
+    const isAdmin = localStorage.getItem('role_id') === '1';
+
     if (to.matched.some(record => record.meta.requiresAuth)) {
         if (!isAuthenticated) {
-            next({ name: 'login' });
-        } else {
-            next();
+            return next({ name: 'login' });
         }
-    }
-    else if (to.matched.some(record => record.meta.requiresUnauth)) {
+        if (to.matched.some(record => record.meta.requiresAdmin) && !isAdmin) {
+            return next({ name: 'advertisements' });
+        }
+        return next();
+    } else if (to.matched.some(record => record.meta.requiresUnauth)) {
         if (isAuthenticated) {
-            next({ name: 'advertisements' });
-        } else {
-            next();
+            return next({ name: 'advertisements' });
         }
-    }
-    else {
+        return next();
+    } else {
         next();
     }
 });
 
 
-
-export default router
+export default router;

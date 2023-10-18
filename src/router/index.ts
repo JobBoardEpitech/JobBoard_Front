@@ -105,26 +105,46 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-    const isAuthenticated = !!localStorage.getItem('auth_token');  // Convertit en boolean
-    const isAdmin = localStorage.getItem('role_id') === '1';
+    const auth_token = localStorage.getItem('auth_token');
+    const userInfoStr = localStorage.getItem('user_info');
+
+    // Vérifiez si l'utilisateur est authentifié
+    const isAuthenticated = auth_token && userInfoStr;
 
     if (to.matched.some(record => record.meta.requiresAuth)) {
         if (!isAuthenticated) {
             return next({ name: 'login' });
         }
-        if (to.matched.some(record => record.meta.requiresAdmin) && !isAdmin) {
-            return next({ name: 'advertisements' });
+    }
+
+    if (to.matched.some(record => record.meta.requiresAdmin)) {
+        // Convertissez la chaîne JSON en objet JavaScript en vérifiant d'abord si userInfoStr n'est pas null
+        let userInfo = null;
+        if (userInfoStr !== null) {
+            try {
+                userInfo = JSON.parse(userInfoStr);
+            } catch (error) {
+                console.error('Erreur lors de la conversion de user_info en objet JSON', error);
+            }
         }
-        return next();
-    } else if (to.matched.some(record => record.meta.requiresUnauth)) {
+
+        // Vérifiez si l'utilisateur est un administrateur en fonction du rôle ID
+        if (userInfo && userInfo.role_id === 1) {
+            // L'utilisateur est un administrateur
+            next();
+        } else {
+            // L'utilisateur n'est pas un administrateur, redirigez-le vers la page de connexion
+            return next({ name: 'login' });
+        }
+    }
+
+    if (to.matched.some(record => record.meta.requiresUnauth)) {
         if (isAuthenticated) {
             return next({ name: 'advertisements' });
         }
-        return next();
-    } else {
-        next();
     }
-});
 
+    next();
+});
 
 export default router;

@@ -4,7 +4,7 @@
       <div class="overflow-x-auto flex-1">
         <div class="py-8 px-8 mx-auto">
           <h2 class="mb-4 text-2xl font-bold text-gray-900 flex justify-center pb-16">Ajouter une annonce</h2>
-          <form action="#">
+          <form @submit.prevent="handleSubmit">
             <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
               <div class="w-full">
                 <label for="brand" class="block mb-2 text-sm font-medium text-gray-900">Nom</label>
@@ -22,13 +22,13 @@
               <div class="w-full">
                 <label for="price" class="block mb-2 text-sm font-medium text-gray-900">Type de contrat</label>
                 <JobInput
-                    :value="values.contractType"
+                    :value="values.contract_type"
                     id="contractType"
                     type="text"
                     autocomplete="text"
                     required
                     placeholder="Type de contrat"
-                    @update:value="values.contractType = $event"
+                    @update:value="values.contract_type = $event"
 
                 />
               </div>
@@ -48,14 +48,14 @@
               <div class="sm:col-span-2">
                 <label for="description" class="block mb-2 text-sm font-medium text-gray-900 ">Short Description</label>
                 <JobInput
-                    :value="values.shortDescription"
+                    :value="values.short_description"
                     id="shortDescription"
                     rows="3"
                     type="text"
                     autocomplete="shortDescription"
                     required
                     placeholder=" Short Description"
-                    @update:value="values.shortDescription = $event"
+                    @update:value="values.short_description = $event"
                 />
               </div>
             </div>
@@ -81,11 +81,27 @@
 <script setup lang="ts">
 import JobInput from "@/components/common/JobInput.vue";
 import {ref} from "vue";
+import {createAdvertisement} from "@/services/advertisements";
+import {useRouter} from "vue-router";
 
 const values = ref({
   name:"",
   description:"",
-  shortDescription:"",
-  contractType:""
+  short_description:"",
+  contract_type:""
 })
+
+const router = useRouter();
+
+function handleSubmit() {
+  createAdvertisement(values.value)
+      .then(() => {
+        router.push({ name: 'advertisements' });
+      })
+      .catch(error => {
+        console.error("Erreur lors de la création de l'annonce:", error);
+        window.alert("Erreur lors de la création de l'annonce. Veuillez réessayer.");
+      });
+}
+
 </script>

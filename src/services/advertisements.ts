@@ -18,3 +18,18 @@ export async function fetchAdvertisements(): Promise<Advertisement[]> {
         return [];
     }
 }
+
+export async function createAdvertisement(advertisement: Partial<Advertisement>): Promise<any> {
+    try {
+        const response = await axios.post('http://127.0.0.1:3333/api/advertisements', advertisement);
+        if (!response.data || response.status < 200 || response.status >= 300) {
+            throw new Error("Réponse non valide du serveur.");
+        }
+        return response;
+    } catch (error) {
+        console.error('Erreur lors de la création de l annonce :', error);
+        throw error;
+    }
+}
+
+

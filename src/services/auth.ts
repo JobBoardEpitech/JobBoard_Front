@@ -63,9 +63,16 @@ export async function logout(token: string): Promise<void> {
 export async function register(credentials: RegisterCredentials): Promise<LoginResponse> {
     try {
         const response = await axios.post('http://127.0.0.1:3333/api/register', credentials);
+        console.log('Réponse après création de compte :', response);
 
         const { user } = response.data;
-        localStorage.setItem('user_info', JSON.stringify(user));
+
+        // Vérifiez si user est une structure JSON valide
+        if (user && typeof user === 'object') {
+            localStorage.setItem('user_info', JSON.stringify(user));
+        } else {
+            console.error('Les données utilisateur ne sont pas valides :', user);
+        }
 
         return response.data;
     } catch (error) {

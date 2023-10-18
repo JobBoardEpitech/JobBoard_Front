@@ -127,11 +127,14 @@ const handleSubmit = async () => {
 
     localStorage.setItem('auth_token', response.token);
 
+    localStorage.setItem('user_info', JSON.stringify(response.user));
+
     await router.push({path: '/'});
   } catch (error) {
     console.error('Erreur lors de la tentative d’inscription:', error);
   }
 }
+
 </script>
 
 

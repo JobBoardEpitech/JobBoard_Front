@@ -7,12 +7,12 @@
           <div class="w-full">
             <label for="firstname" class="block mb-2 text-sm font-medium text-gray-900">Firstname</label>
             <JobInput
-                :value="values.first_name"
+                :value="values.firstName"
                 id="firstname"
                 type="text"
                 autocomplete="given-name"
                 placeholder="Firstname"
-                @update:value="values.first_name = $event"
+                @update:value="values.firstName = $event"
             />
           </div>
           <div class="w-full">
@@ -83,7 +83,7 @@ const errors = ref({});  // for handling server errors
 
 const values = ref<UserUpdate>({
   email: "",
-  first_name: "",
+  firstName: "",
   name: "",
   phone: "",
   address: "",
@@ -102,6 +102,7 @@ interface AxiosError {
 const updateUserHandler = async () => {
   try {
     const userIdNumber = Number(userId);
+    console.log(values.value)
     const response = await updateUser(userIdNumber, values.value);
 
     console.log('Réponse du serveur :', response);
@@ -127,7 +128,14 @@ const updateUserHandler = async () => {
 onMounted(async () => {
   try {
     const userData = await getUserById(Number(userId));
-    values.value = userData;
+    console.log(userData)
+    values.value = {
+      email: userData.email,
+      firstName: userData.first_name,
+      name: userData.name,
+      phone: userData.phone,
+      address: userData.address,
+    }
   } catch (error) {
     console.error('Erreur lors de la récupération des données utilisateur:', error);
   }

@@ -3,17 +3,18 @@ import axios from "axios";
 export type User = {
     id: number
     email: string
-    firstName: string
+    first_name: string
     name: string
     phone: string
     address: string
-    roleId: number
-    user_role: string
+    role_id: number
+    created_at: string
+    updated_at: string
 }
 
 export interface UserUpdate {
     email: string;
-    first_name: string;
+    firstName: string;
     name: string;
     phone: string;
     address: string;
@@ -42,7 +43,7 @@ export async function updateUser(userId: number, updatedUserData: UserUpdate): P
 }
 
 
-export async function getUserById(userId: number): Promise<UserUpdate> {
+export async function getUserById(userId: number): Promise<User> {
     try {
         const response = await axios.get(`http://127.0.0.1:3333/api/users/${userId}`);
         return response.data;

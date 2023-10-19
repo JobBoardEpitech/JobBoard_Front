@@ -33,7 +33,7 @@
             </td>
             <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
               <span class="rounded-full bg-green-200 px-3 py-1 text-xs font-semibold text-green-900">
-                {{user.roleId}}
+                {{user.role_id}}
               </span>
             </td>
             <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
@@ -72,13 +72,15 @@
 
 </template>
 <script setup lang="ts">
-import { ref } from 'vue';
+import {ref} from 'vue';
+import type { PropType } from 'vue';
 import axios from "axios";
+import type {User} from "@/services/user";
 
 // Props
 const props = defineProps({
   users:{
-    type: Array,
+    type: Array as PropType<User[]>,
     default: () => []
   }
 });
@@ -87,7 +89,7 @@ console.log(props.users);
 
 const localUsers = ref([...props.users]);
 
-const deleteUsers = async (id) => {
+const deleteUsers = async (id: number) => {
   console.log(id)
   const isConfirmed = window.confirm('Are you sure you want to delete this user?');
   if (!isConfirmed) return;
@@ -96,7 +98,7 @@ const deleteUsers = async (id) => {
 
     localUsers.value = localUsers.value.filter(ad => ad.id !== id);
     location.reload();
-  } catch (error) {
+  } catch (error: any) {
     console.error('Error deleting advertisement:', error.response ? error.response.data : error.message);
   }
 };

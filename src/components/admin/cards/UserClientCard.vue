@@ -52,7 +52,7 @@
               </p>
             </td>
             <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
-              <button  class="flex-no-shrink bg-red-500 px-5 ml-4 py-2 text-sm shadow-sm hover:shadow-lg font-medium tracking-wider border-2 border-red-500 text-white rounded-full">
+              <button @click="deleteUsers(user.id)" class="flex-no-shrink bg-red-500 px-5 ml-4 py-2 text-sm shadow-sm hover:shadow-lg font-medium tracking-wider border-2 border-red-500 text-white rounded-full">
                 Delete
               </button>
             </td>
@@ -72,14 +72,31 @@
 
 </template>
 <script setup lang="ts">
-import type {PropType} from "vue";
-import type {User} from "@/services/user";
+import { ref } from 'vue';
+import axios from "axios";
 
 // Props
 const props = defineProps({
   users:{
-    type: Array as PropType<User[]>
+    type: Array,
+    default: () => []
   }
+});
 
-})
+const localUsers = ref([...props.users]);
+
+const deleteUsers = async (id) => {
+  console.log(id)
+  const isConfirmed = window.confirm('Are you sure you want to delete this user?');
+  if (!isConfirmed) return;
+  try {
+    await axios.delete(`http://127.0.0.1:3333/api/users/${id}`);
+
+    localUsers.value = localUsers.value.filter(ad => ad.id !== id);
+    location.reload();
+  } catch (error) {
+    console.error('Error deleting advertisement:', error.response ? error.response.data : error.message);
+  }
+};
+
 </script>

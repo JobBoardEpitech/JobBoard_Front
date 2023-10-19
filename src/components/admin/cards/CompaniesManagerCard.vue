@@ -34,7 +34,7 @@
               </p>
             </td>
             <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
-              <button  class="flex-no-shrink bg-red-500 px-5 ml-4 py-2 text-sm shadow-sm hover:shadow-lg font-medium tracking-wider border-2 border-red-500 text-white rounded-full">
+              <button @click="deleteCompanies(company.id)" class="flex-no-shrink bg-red-500 px-5 ml-4 py-2 text-sm shadow-sm hover:shadow-lg font-medium tracking-wider border-2 border-red-500 text-white rounded-full">
                 Delete
               </button>
             </td>
@@ -54,12 +54,31 @@
 </template>
 
 <script setup lang="ts">
-import {PropType} from "vue";
-import type {Company} from "@/services/companies";
+
+
+import {ref} from "vue";
+import axios from "axios";
 
 const props = defineProps({
   companies: {
-    type: Array as PropType<Company[]>
+    type: Array,
+    default: () => []
   }
-})
+});
+
+const localCompanies = ref([...props.companies]);
+
+const deleteCompanies = async (id) => {
+  console.log(id)
+  const isConfirmed = window.confirm('Are you sure you want to delete this company?');
+  if (!isConfirmed) return;
+  try {
+    await axios.delete(`http://127.0.0.1:3333/api/companies/${id}`);
+
+    localCompanies.value = localCompanies.value.filter(ad => ad.id !== id);
+    location.reload();
+  } catch (error) {
+    console.error('Error deleting advertisement:', error.response ? error.response.data : error.message);
+  }
+};
 </script>

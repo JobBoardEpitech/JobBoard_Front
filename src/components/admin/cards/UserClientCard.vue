@@ -26,9 +26,9 @@
             </td>
             <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
               <div class="flex items-center">
-                  <router-link :to="{name: 'client-manager-modify'}" class="whitespace-no-wrap">
-                    {{ `${user.first_name} ${user.name}` }}
-                  </router-link>
+                <router-link :to="{name: 'client-manager-modify', params: { userId: user.id }}" class="whitespace-no-wrap">
+                  {{ `${user.first_name} ${user.name}` }}
+                </router-link>
               </div>
             </td>
             <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
@@ -82,6 +82,8 @@ const props = defineProps({
     default: () => []
   }
 });
+
+console.log(props.users);
 
 const localUsers = ref([...props.users]);
 

@@ -75,7 +75,7 @@ const router = createRouter({
             meta: { requiresAdmin: true }
         },
         {
-            path: '/dashboard/client-manager/modify-client',
+            path: '/dashboard/client-manager/modify-client/:userId',
             name: 'client-manager-modify',
             component: ModifyUserView,
             meta: { requiresAdmin: true }

@@ -36,6 +36,9 @@
                 placeholder="Email"
                 @update:value="values.email = $event"
             />
+            <div v-if="errors.email" class="text-red-500 mt-2">
+              {{ errors.email }}
+            </div>
           </div>
           <div>
             <label for="address" class="block mb-2 text-sm font-medium text-gray-900">Address</label>
@@ -72,14 +75,16 @@
 
 <script setup lang="ts">
 import JobInput from "@/components/common/JobInput.vue";
-import {onMounted, ref} from "vue";
+import { onMounted, ref } from "vue";
 import { useRoute } from "vue-router";
 import type { UserUpdate } from "@/services/user";
-import {getUserById, updateUser} from "@/services/user";
+import { getUserById, updateUser } from "@/services/user";
 
 const route = useRoute();
 const userId = route.params.userId;
-const errors = ref({});  // for handling server errors
+const errors = ref({}); // for handling server errors
+
+const initialEmail = ref(""); // Store the initial email
 
 const values = ref<UserUpdate>({
   email: "",
@@ -88,7 +93,6 @@ const values = ref<UserUpdate>({
   phone: "",
   address: "",
 });
-
 
 interface AxiosError {
   response?: {
@@ -102,9 +106,7 @@ interface AxiosError {
 const updateUserHandler = async () => {
   try {
     const userIdNumber = Number(userId);
-    console.log(values.value)
     const response = await updateUser(userIdNumber, values.value);
-
     console.log('Réponse du serveur :', response);
     // Display a success message
   } catch (error: any) {
@@ -112,7 +114,16 @@ const updateUserHandler = async () => {
 
     if (axiosError.response) {
       console.error('Erreur lors de la modification (statut ' + axiosError.response.status + ')', axiosError.response.data);
-      errors.value = axiosError.response.data;
+
+      if (axiosError.response.data.errors) {
+        axiosError.response.data.errors.forEach((error: any) => {
+          if (error.field === "email" && error.rule === "unique") {
+            errors.value.email = "L'adresse e-mail est déjà utilisée. Veuillez en choisir une autre.";
+          } else if (error.field === "email" && error.rule === "required") {
+            errors.value.email = "L'adresse e-mail est requise.";
+          }
+        });
+      }
     } else if (axiosError.request) {
       console.error('Erreur lors de la modification (la requête n\'a pas atteint le serveur)', axiosError.request);
     } else if (axiosError.message) {
@@ -121,23 +132,22 @@ const updateUserHandler = async () => {
       console.error('Erreur inattendue lors de la modification');
     }
   }
-
 };
-
 
 onMounted(async () => {
   try {
     const userData = await getUserById(Number(userId));
-    console.log(userData)
+    initialEmail.value = userData.email; // Store the initial email
     values.value = {
       email: userData.email,
       firstName: userData.first_name,
       name: userData.name,
       phone: userData.phone,
       address: userData.address,
-    }
+    };
   } catch (error) {
     console.error('Erreur lors de la récupération des données utilisateur:', error);
   }
 });
 </script>
+

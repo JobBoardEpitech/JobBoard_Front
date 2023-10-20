@@ -70,6 +70,10 @@
         </button>
       </form>
     </div>
+    <div v-if="showSuccessPopup" class="fixed top-4 right-4 z-50 p-4 bg-green-500 text-white rounded shadow-lg transform transition-all duration-300 ease-in-out">
+      <p class="font-bold">Succès !</p>
+      <p>Modification réussie.</p>
+    </div>
   </div>
 </template>
 
@@ -83,6 +87,7 @@ import { getUserById, updateUser } from "@/services/user";
 const route = useRoute();
 const userId = route.params.userId;
 const errors = ref({}); // for handling server errors
+const showSuccessPopup = ref(false);
 
 const initialEmail = ref(""); // Store the initial email
 
@@ -108,6 +113,11 @@ const updateUserHandler = async () => {
     const userIdNumber = Number(userId);
     const response = await updateUser(userIdNumber, values.value);
     console.log('Réponse du serveur :', response);
+    showSuccessPopup.value = true;
+    // Masquer le popup après 5 secondes
+    setTimeout(() => {
+      showSuccessPopup.value = false;
+    }, 5000)
     // Display a success message
   } catch (error: any) {
     const axiosError = error as AxiosError;

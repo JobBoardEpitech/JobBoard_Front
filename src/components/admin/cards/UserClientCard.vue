@@ -68,39 +68,65 @@
         </div>
       </div>
     </div>
+    <div v-if="showDeleteSuccessPopup" class="fixed top-4 right-4 z-50 p-4 bg-green-500 text-white rounded shadow-lg transform transition-all duration-300 ease-in-out">
+      <p class="font-bold">Succès !</p>
+      <p>Utilisateur supprimé avec succès.</p>
+    </div>
+    <div v-if="showUpdateSuccessPopup" class="fixed top-4 right-4 z-50 p-4 bg-green-500 text-white rounded shadow-lg transform transition-all duration-300 ease-in-out">
+      <p class="font-bold">Succès !</p>
+      <p>Utilisateur modifié avec succès.</p>
+    </div>
   </div>
-
 </template>
+
 <script setup lang="ts">
-import {ref} from 'vue';
+import { useRouter, useRoute } from 'vue-router';
+import { onMounted, ref } from 'vue';
 import type { PropType } from 'vue';
 import axios from "axios";
-import type {User} from "@/services/user";
+import type { User } from "@/services/user";
 
 // Props
 const props = defineProps({
-  users:{
+  users: {
     type: Array as PropType<User[]>,
     default: () => []
   }
 });
 
-console.log(props.users);
-
+const router = useRouter();
+const route = useRoute();
 const localUsers = ref([...props.users]);
+const showDeleteSuccessPopup = ref(false);
+const showUpdateSuccessPopup = ref(false);
 
 const deleteUsers = async (id: number) => {
-  console.log(id)
   const isConfirmed = window.confirm('Are you sure you want to delete this user?');
   if (!isConfirmed) return;
   try {
     await axios.delete(`http://127.0.0.1:3333/api/users/${id}`);
 
     localUsers.value = localUsers.value.filter(ad => ad.id !== id);
-    location.reload();
+    // Directly show the delete success popup here
+    showDeleteSuccessPopup.value = true;
+    setTimeout(() => {
+      showDeleteSuccessPopup.value = false;
+    }, 5000);
+    router.push({ name: 'client-manager' });
   } catch (error: any) {
-    console.error('Error deleting advertisement:', error.response ? error.response.data : error.message);
+    console.error('Error deleting user:', error.response ? error.response.data : error.message);
   }
 };
 
+onMounted(() => {
+  // Check if the query parameter updated is true to display the popup
+  if (route.query.updated === 'true') {
+    showUpdateSuccessPopup.value = true;
+    setTimeout(() => {
+      showUpdateSuccessPopup.value = false;
+    }, 5000);
+  }
+});
 </script>
+
+

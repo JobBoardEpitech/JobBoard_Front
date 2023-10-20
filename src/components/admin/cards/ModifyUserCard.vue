@@ -78,18 +78,17 @@
 </template>
 
 <script setup lang="ts">
+import {useRoute, useRouter} from "vue-router";
 import JobInput from "@/components/common/JobInput.vue";
 import { onMounted, ref } from "vue";
-import { useRoute } from "vue-router";
 import type { UserUpdate } from "@/services/user";
 import { getUserById, updateUser } from "@/services/user";
 
 const route = useRoute();
-const userId = route.params.userId;
-const errors = ref({}); // for handling server errors
-const showSuccessPopup = ref(false);
+const router = useRouter();
 
-const initialEmail = ref(""); // Store the initial email
+const userId = route.params.userId;
+const errors = ref({});
 
 const values = ref<UserUpdate>({
   email: "",
@@ -99,47 +98,15 @@ const values = ref<UserUpdate>({
   address: "",
 });
 
-interface AxiosError {
-  response?: {
-    status: number;
-    data: any;
-  };
-  request?: any;
-  message: string;
-}
-
 const updateUserHandler = async () => {
   try {
-    const userIdNumber = Number(userId);
-    const response = await updateUser(userIdNumber, values.value);
-    console.log('Réponse du serveur :', response);
-    showSuccessPopup.value = true;
-    // Masquer le popup après 5 secondes
-    setTimeout(() => {
-      showSuccessPopup.value = false;
-    }, 5000)
-    // Display a success message
+    const response = await updateUser(Number(userId), values.value);
+
+    // Redirigez vers la page des utilisateurs avec un paramètre de requête pour afficher le popup
+    router.push({ name: 'client-manager', query: { updated: 'true' } });
   } catch (error: any) {
-    const axiosError = error as AxiosError;
-
-    if (axiosError.response) {
-      console.error('Erreur lors de la modification (statut ' + axiosError.response.status + ')', axiosError.response.data);
-
-      if (axiosError.response.data.errors) {
-        axiosError.response.data.errors.forEach((error: any) => {
-          if (error.field === "email" && error.rule === "unique") {
-            errors.value.email = "L'adresse e-mail est déjà utilisée. Veuillez en choisir une autre.";
-          } else if (error.field === "email" && error.rule === "required") {
-            errors.value.email = "L'adresse e-mail est requise.";
-          }
-        });
-      }
-    } else if (axiosError.request) {
-      console.error('Erreur lors de la modification (la requête n\'a pas atteint le serveur)', axiosError.request);
-    } else if (axiosError.message) {
-      console.error('Erreur inattendue lors de la modification', axiosError.message);
-    } else {
-      console.error('Erreur inattendue lors de la modification');
+    if (error.response && error.response.data.errors) {
+      errors.value.email = "Erreur lors de la mise à jour de l'email.";
     }
   }
 };
@@ -147,7 +114,6 @@ const updateUserHandler = async () => {
 onMounted(async () => {
   try {
     const userData = await getUserById(Number(userId));
-    initialEmail.value = userData.email; // Store the initial email
     values.value = {
       email: userData.email,
       firstName: userData.first_name,
@@ -160,4 +126,5 @@ onMounted(async () => {
   }
 });
 </script>
+
 

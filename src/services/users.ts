@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export type User = {
+export type Users = {
     id: number
     email: string
     first_name: string
@@ -20,12 +20,12 @@ export interface UserUpdate {
     address: string;
 }
 
-export async function fetchUsers(): Promise<User[]> {
+export async function fetchUsers(): Promise<Users[]> {
     try {
         const response = await axios.get('http://127.0.0.1:3333/api/users');
         return response.data;
     } catch (error) {
-        console.error('There was an error fetching the advertisements:', error);
+        console.error('There was an error fetching the users:', error);
         return [];
     }
 }
@@ -43,7 +43,7 @@ export async function updateUser(userId: number, updatedUserData: UserUpdate): P
 }
 
 
-export async function getUserById(userId: number): Promise<User> {
+export async function getUserById(userId: number): Promise<Users> {
     try {
         const response = await axios.get(`http://127.0.0.1:3333/api/users/${userId}`);
         return response.data;

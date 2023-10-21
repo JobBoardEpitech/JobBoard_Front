@@ -1,7 +1,7 @@
 <template>
   <div class="w-full">
     <div class="py-8 px-4 mx-auto lg:py-16 w-[30vw]">
-      <h2 class="mb-4 text-xl font-bold text-gray-900">Modify User</h2>
+      <h2 class="mb-4 text-xl font-bold text-gray-900">Modify Users</h2>
       <form @submit.prevent="updateUserHandler">
         <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
           <div class="w-full">
@@ -77,8 +77,8 @@
 import {useRoute, useRouter} from "vue-router";
 import JobInput from "@/components/common/JobInput.vue";
 import { onMounted, ref } from "vue";
-import type { UserUpdate } from "@/services/user";
-import { getUserById, updateUser } from "@/services/user";
+import type { UserUpdate } from "@/services/users";
+import { getUserById, updateUser } from "@/services/users";
 
 const route = useRoute();
 const router = useRouter();

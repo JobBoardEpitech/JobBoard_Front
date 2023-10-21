@@ -8,10 +8,12 @@
 </template>
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
+import type { Ref } from "vue";
 import {fetchAdvertisements} from "@/services/advertisements";
+import type { Advertisement } from "@/services/advertisements";
 import AdvertisementsManagerCard from "@/components/admin/cards/AdvertisementsManagerCard.vue";
 import SideBar from "@/components/admin/sideBar/SideBar.vue";
-const advertisements = ref([]);
+const advertisements: Ref<Advertisement[]> = ref([]);
 
 onMounted(async () => {
   try {

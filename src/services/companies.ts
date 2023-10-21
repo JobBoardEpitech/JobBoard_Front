@@ -12,7 +12,7 @@ export default class CompaniesService {
             const response = await axios.get('http://127.0.0.1:3333/api/companies');
             return response.data;
         } catch (error) {
-            console.error('There was an error fetching the advertisements:', error);
+            console.error('There was an error fetching the companies:', error);
             return [];
         }
     }

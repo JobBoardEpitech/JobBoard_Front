@@ -7,7 +7,7 @@
           <tr class="bg-blue-600 text-left text-xs font-semibold uppercase tracking-widest text-white">
             <th class="px-5 py-3">ID</th>
             <th class="px-5 py-3">Full Name</th>
-            <th class="px-5 py-3">User Role</th>
+            <th class="px-5 py-3">Users Role</th>
             <th class="px-5 py-3">Phone</th>
             <th class="px-5 py-3">Email</th>
             <th class="px-5 py-3">Address</th>
@@ -36,7 +36,7 @@
             </td>
             <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
               <span class="rounded-full bg-green-200 px-3 py-1 text-xs font-semibold text-green-900">
-                {{user.role_id}}
+                {{findUserRoleById(user.role_id)?.name || ''}}
               </span>
             </td>
             <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
@@ -89,22 +89,38 @@ import { useRouter, useRoute } from 'vue-router';
 import { onMounted, ref } from 'vue';
 import type { PropType } from 'vue';
 import axios from "axios";
-import type { User } from "@/services/user";
+import type { Users } from "@/services/users";
+import type {UserRole} from "@/services/userRoles";
 
 // Props
 const props = defineProps({
   users: {
-    type: Array as PropType<User[]>,
+    type: Array as PropType<Users[]>,
+    required: true,
+    default: () => []
+  },
+  roles: {
+    type: Array as PropType<UserRole[]>,
+    required: true,
     default: () => []
   }
 });
 
+/* HOOKS */
 const router = useRouter();
 const route = useRoute();
+
+/* REFS */
 const localUsers = ref([...props.users]);
 const showDeleteSuccessPopup = ref(false);
 const showUpdateSuccessPopup = ref(false);
 
+/* methods */
+
+const findUserRoleById = (userId: number): UserRole | null => {
+  if(!props.roles) return null
+  return props.roles.find((role: UserRole) => role.id === userId)
+}
 const closeDeleteSuccessPopup = () => {
   showDeleteSuccessPopup.value = false;
 };
@@ -131,6 +147,8 @@ const deleteUsers = async (id: number) => {
   }
 };
 
+
+/*  LIFE CYCLE */
 onMounted(() => {
   // Check if the query parameter updated is true to display the popup
   if (route.query.updated === 'true') {

@@ -54,43 +54,43 @@ const router = createRouter({
         {
             path: '/dashboard',
             redirect: '/dashboard/client-manager',
-            meta: { requiresAdmin: true }
+            meta: { requiresAdmin: true, requiresAuth: true }
         },
         {
             path: '/dashboard/client-manager',
             name: 'client-manager',
             component: ClientManager,
-            meta: { requiresAdmin: true }
+            meta: { requiresAdmin: true, requiresAuth: true }
         },
         {
             path: '/dashboard/companies-manager',
             name: 'companies-manager',
             component: CompaniesManager,
-            meta: { requiresAdmin: true }
+            meta: { requiresAdmin: true, requiresAuth: true }
         },
         {
             path: '/dashboard/advertisements-manager',
             name: 'advertisements-manager',
             component: AdvertisementsManager,
-            meta: { requiresAdmin: true }
+            meta: { requiresAdmin: true, requiresAuth: true }
         },
         {
             path: '/dashboard/client-manager/modify-client/:userId',
             name: 'client-manager-modify',
             component: ModifyUserView,
-            meta: { requiresAdmin: true }
+            meta: { requiresAdmin: true, requiresAuth: true }
         },
         {
             path: '/dashboard/advertisements-manager/modify-advertisements/:advertisementId',
             name: 'advertisements-manager-modify',
             component: ModifyAdvertisementsView,
-            meta: { requiresAdmin: true }
+            meta: { requiresAdmin: true, requiresAuth: true }
         },
         {
-            path: '/dashboard/companies-manager/modify-company',
+            path: '/dashboard/companies-manager/modify-company/:companyId',
             name: 'companies-manager-modify',
             component: ModifyCompaniesView,
-            meta: { requiresAdmin: true }
+            meta: { requiresAdmin: true, requiresAuth: true }
         },
 
 

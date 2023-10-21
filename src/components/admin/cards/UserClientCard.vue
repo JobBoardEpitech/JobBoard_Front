@@ -26,8 +26,11 @@
             </td>
             <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
               <div class="flex items-center">
-                <router-link :to="{name: 'client-manager-modify', params: { userId: user.id }}" class="whitespace-no-wrap">
-                  {{ `${user.first_name} ${user.name}` }}
+                <router-link
+                    :to="{name: 'client-manager-modify',
+                     params: { userId: user.id }}"
+                    class="whitespace-no-wrap text-blue-600 hover:text-blue-700 hover:underline underline-offset-4 font-semibold">
+                {{ `${user.first_name} ${user.name}` }}
                 </router-link>
               </div>
             </td>

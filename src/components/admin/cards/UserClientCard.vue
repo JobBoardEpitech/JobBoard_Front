@@ -69,10 +69,12 @@
       </div>
     </div>
     <div v-if="showDeleteSuccessPopup" class="fixed top-4 right-4 z-50 p-4 bg-green-500 text-white rounded shadow-lg transform transition-all duration-300 ease-in-out">
+      <button @click="closeDeleteSuccessPopup" class="absolute top-2 right-2 text-xl focus:outline-none">×</button>
       <p class="font-bold">Succès !</p>
       <p>Utilisateur supprimé avec succès.</p>
     </div>
     <div v-if="showUpdateSuccessPopup" class="fixed top-4 right-4 z-50 p-4 bg-green-500 text-white rounded shadow-lg transform transition-all duration-300 ease-in-out">
+      <button @click="closeUpdateSuccessPopup" class="absolute top-2 right-2 text-xl focus:outline-none">×</button>
       <p class="font-bold">Succès !</p>
       <p>Utilisateur modifié avec succès.</p>
     </div>
@@ -99,6 +101,14 @@ const route = useRoute();
 const localUsers = ref([...props.users]);
 const showDeleteSuccessPopup = ref(false);
 const showUpdateSuccessPopup = ref(false);
+
+const closeDeleteSuccessPopup = () => {
+  showDeleteSuccessPopup.value = false;
+};
+
+const closeUpdateSuccessPopup = () => {
+  showUpdateSuccessPopup.value = false;
+};
 
 const deleteUsers = async (id: number) => {
   const isConfirmed = window.confirm('Are you sure you want to delete this user?');

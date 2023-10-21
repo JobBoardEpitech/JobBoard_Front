@@ -25,7 +25,7 @@
             </td>
             <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
               <div class="flex items-center">
-                <router-link :to="{name: 'advertisements-manager-modify'}" class="whitespace-no-wrap">
+                <router-link :to="{name: 'advertisements-manager-modify', params: { advertisementId: advertisement.id }}" class="whitespace-no-wrap">
                   {{ advertisement.name }}
                 </router-link>
               </div>
@@ -62,42 +62,81 @@
         </div>
       </div>
     </div>
+    <div v-if="showDeleteSuccessPopup" class="fixed top-4 right-4 z-50 p-4 bg-green-500 text-white rounded shadow-lg transform transition-all duration-300 ease-in-out">
+      <button @click="closeDeleteSuccessPopup" class="absolute top-2 right-2 text-xl focus:outline-none">×</button>
+      <p class="font-bold">Succès !</p>
+      <p>Utilisateur supprimé avec succès.</p>
+    </div>
+    <div v-if="showUpdateSuccessPopup" class="fixed top-4 right-4 z-50 p-4 bg-green-500 text-white rounded shadow-lg transform transition-all duration-300 ease-in-out">
+      <button @click="closeUpdateSuccessPopup" class="absolute top-2 right-2 text-xl focus:outline-none">×</button>
+      <p class="font-bold">Succès !</p>
+      <p>Utilisateur modifié avec succès.</p>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
+import type { PropType } from 'vue';
 import axios from "axios";
+import type { Advertisement } from "@/services/advertisements";
+import {useRoute} from "vue-router";
+import router from "@/router";
+
+const route = useRoute();
+const showDeleteSuccessPopup = ref(false);
+const showUpdateSuccessPopup = ref(false);
+
+const closeDeleteSuccessPopup = () => {
+  showDeleteSuccessPopup.value = false;
+};
+
+const closeUpdateSuccessPopup = () => {
+  showUpdateSuccessPopup.value = false;
+};
+
 
 const props = defineProps({
   advertisements: {
-    type: Array,
+    type: Array as PropType<Advertisement[]>,
     default: () => []
   }
 });
 
 const localAdvertisements = ref([...props.advertisements]);
 
-const truncateText = (text, limit = 100) => {
+const truncateText = (text: string, limit = 100) => {
   if (text.length <= limit) return text;
   return text.substring(0, limit) + '...';
 }
 
-const deleteAdvertisement = async (id) => {
+const deleteAdvertisement = async (id: number) => {
   console.log(id)
-  const isConfirmed = window.confirm('Are you sure you want to delete this advertisement?');
+  const isConfirmed = window.confirm('Êtes-vous sûr de vouloir supprimer cette annonce?');
   if (!isConfirmed) return;
   try {
     await axios.delete(`http://127.0.0.1:3333/api/advertisements/${id}`);
 
     localAdvertisements.value = localAdvertisements.value.filter(ad => ad.id !== id);
-    location.reload();
-  } catch (error) {
-    console.error('Error deleting advertisement:', error.response ? error.response.data : error.message);
+
+    localStorage.setItem('showDeleteSuccessPopup', 'true'); // Définir le flag dans le localStorage
+
+    showDeleteSuccessPopup.value = true;
+    setTimeout(() => {
+      showDeleteSuccessPopup.value = false;
+    }, 5000);
+    router.push({ name: 'advertisements-manager' });
+  } catch (error: any) {
+    console.error("Erreur lors de la suppression de l'annonce:", error.response ? error.response.data : error.message);
   }
 };
 
-const emit = defineEmits(['clickCard']);
-
-
+onMounted(() => {
+  if (route.query.updated === 'true') {
+    showUpdateSuccessPopup.value = true;
+    setTimeout(() => {
+      showUpdateSuccessPopup.value = false;
+    }, 5000);
+  }
+});
 </script>

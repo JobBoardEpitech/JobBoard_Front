@@ -81,7 +81,7 @@ const router = createRouter({
             meta: { requiresAdmin: true }
         },
         {
-            path: '/dashboard/advertisements-manager/modify-advertisements',
+            path: '/dashboard/advertisements-manager/modify-advertisements/:advertisementId',
             name: 'advertisements-manager-modify',
             component: ModifyAdvertisementsView,
             meta: { requiresAdmin: true }

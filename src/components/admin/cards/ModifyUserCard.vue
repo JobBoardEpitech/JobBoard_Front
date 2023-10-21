@@ -70,10 +70,6 @@
         </button>
       </form>
     </div>
-    <div v-if="showSuccessPopup" class="fixed top-4 right-4 z-50 p-4 bg-green-500 text-white rounded shadow-lg transform transition-all duration-300 ease-in-out">
-      <p class="font-bold">Succès !</p>
-      <p>Modification réussie.</p>
-    </div>
   </div>
 </template>
 

@@ -36,6 +36,9 @@ const selectedJob = ref<Advertisement | null>(null);
 onMounted(async () => {
   try {
     advertisements.value = await fetchAdvertisements();
+    if (advertisements.value.length > 0){
+      selectedJob.value = advertisements.value[0]
+    }
   } catch (error) {
     console.error("Erreur lors de la récupération des annonces:", error);
   } finally {

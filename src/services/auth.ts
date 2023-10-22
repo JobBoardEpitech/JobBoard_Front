@@ -19,6 +19,24 @@ type LoginResponse = {
     }
 };
 
+type RegisterResponse = {
+    token: {
+        type: string
+        token: string
+        expires_at: string
+    };
+    user: {
+        id: number;
+        email: string;
+        first_name: string;
+        name: string;
+        phone: string;
+        address: string;
+        role_id: number;
+
+    }
+};
+
 type RegisterCredentials = {
     email: string;
     password: string;
@@ -60,7 +78,7 @@ export async function logout(token: string): Promise<void> {
     }
 }
 
-export async function register(credentials: RegisterCredentials): Promise<LoginResponse> {
+export async function register(credentials: RegisterCredentials): Promise<RegisterResponse> {
     try {
         const response = await axios.post('http://127.0.0.1:3333/api/register', credentials);
         console.log('Réponse après création de compte :', response);

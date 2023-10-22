@@ -125,7 +125,7 @@ const handleSubmit = async () => {
     const response = await register(userCredentials);
     console.log('Inscription réussie:', response);
 
-    localStorage.setItem('auth_token', response.token);
+    localStorage.setItem('auth_token', response.token.token);
 
     localStorage.setItem('user_info', JSON.stringify(response.user));
 

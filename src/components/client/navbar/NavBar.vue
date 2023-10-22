@@ -56,6 +56,7 @@
 import { useRoute } from 'vue-router';
 import { logout } from "@/services/auth";
 import router from "@/router";
+import type {Users} from "@/services/users";
 
 const route = useRoute();
 
@@ -82,7 +83,7 @@ const handleLogout = async () => {
 
 console.log("Contenu de user_info:", localStorage.getItem('user_info'));
 
-let userInfo = {};
+let userInfo = {} as Users;
 const rawUserInfo = localStorage.getItem('user_info');
 
 if (rawUserInfo && rawUserInfo.trim().startsWith('{')) {

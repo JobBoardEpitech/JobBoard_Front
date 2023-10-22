@@ -1,20 +1,23 @@
 import axios from "axios";
 
-export type UserRole =  {
+export type ApplyJob =  {
     id: number
-    name: string
-    created_at: string
-    updated_at: string
+    user_id: number
+    advertisement_id: number
 }
 
-export default class UserRolesService  {
-    static async getUserRoles(): Promise<UserRole[]> {
+export interface ApplyJobCreate {
+    user_id: number
+    advertisement_id: number
+}
+
+export default class ApplyJobsService  {
+    static async create(applyJobCommand: ApplyJobCreate): Promise<ApplyJob[]> {
         try {
-            const response = await axios.get('http://127.0.0.1:3333/api/roles');
-            return response.data;
+            return await axios.post(`http://127.0.0.1:3333/api/apply-jobs`, applyJobCommand);
         } catch (error) {
-            console.error('There was an error fetching the user roles:', error);
-            return [];
+            console.error('There was an error creating the apply job:', error);
+            throw error;
         }
     }
 }

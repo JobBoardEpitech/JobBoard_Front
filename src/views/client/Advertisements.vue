@@ -7,16 +7,21 @@
             v-for="advertisement in advertisements"
             :key="advertisement.id"
             :name="advertisement.name"
+            :active="selectedJob?.id === advertisement.id"
             :contract_type="advertisement.contract_type"
             :short_description="advertisement.short_description"
             @clickCard="onSelectJob(advertisement)"
         />
       </div>
       <DetailedAdvertisementsCard
-          v-if="selectedJob"
-      :name="selectedJob.name"
-      :long_description="selectedJob.description"
-      :contract_type="selectedJob.contract_type"
+       v-if="selectedJob"
+         :key="selectedJob.id"
+         :id="selectedJob.id"
+        :name="selectedJob.name"
+        :long_description="selectedJob.description"
+        :contract_type="selectedJob.contract_type"
+        :userAlreadyApplied="selectedJob.userAlreadyApplied || advertisementsApplyJobs.includes(selectedJob.id)"
+        @userAppliedJob="onUserAppliedJob"
       />
     </section>
   </div>
@@ -32,6 +37,7 @@ import { fetchAdvertisements, Advertisement } from "@/services/advertisements";
 const advertisements = ref<Advertisement[]>([]);
 const isLoading = ref(true);
 const selectedJob = ref<Advertisement | null>(null);
+const advertisementsApplyJobs = ref([] as number[])
 
 onMounted(async () => {
   try {
@@ -48,6 +54,14 @@ onMounted(async () => {
 
 const onSelectJob = (advertisement: Advertisement) => {
   selectedJob.value = advertisement;
+}
+
+const onUserAppliedJob = () => {
+  const selectedJobId = selectedJob.value?.id
+
+  if(selectedJobId) {
+    advertisementsApplyJobs.value.push(selectedJobId)
+  }
 }
 
 </script>

@@ -1,5 +1,4 @@
 import axios from 'axios';
-import Advertisements from "@/views/client/Advertisements.vue";
 
 export type Advertisement = {
     id: number;
@@ -7,12 +6,19 @@ export type Advertisement = {
     description: string;
     short_description: string;
     contract_type: string;
+    userAlreadyApplied: boolean
 }
 
 // Instead of using a hardcoded array, you can define a function to fetch the advertisements.
 export async function fetchAdvertisements(): Promise<Advertisement[]> {
     try {
-        const response = await axios.get('http://127.0.0.1:3333/api/advertisements');
+        const token = localStorage.getItem('auth_token')
+
+        const headers = {
+            'Authorization': `Bearer ${token}`
+        };
+
+        const response = await axios.get('http://127.0.0.1:3333/api/advertisements', { headers });
         return response.data;
     } catch (error) {
         console.error('There was an error fetching the advertisements:', error);
